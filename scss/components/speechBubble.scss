@@ -1,0 +1,249 @@
+[speech-bubble] {
+  --bbColor: #D9D9D9;
+  --bbArrowSize: 0.9rem;
+  --bbBorderRadius: 8px;
+  --bbPadding: 7px;
+  background: var(--bbColor);
+  border-radius: var(--bbBorderRadius);
+  padding: var(--bbPadding);
+  position: relative;
+  display: block;
+  max-width: 120px;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+
+  &::before {
+    content: "";
+    position: absolute;
+    background: var(--bbColor);
+  }
+
+  &[pbottom] {
+    margin-bottom: var(--bbArrowSize);
+  }
+
+  &[ptop] {
+    margin-top: var(--bbArrowSize);
+  }
+
+  &[pleft] {
+    margin-left: var(--bbArrowSize);
+  }
+
+  &[pright] {
+    margin-right: var(--bbArrowSize);
+  }
+
+  &[pbottom]::before,
+  &[ptop]::before {
+    --width: calc(var(--bbArrowSize) / 2 * 3);
+    height: var(--bbArrowSize);
+    width: var(--width);
+  }
+
+  &[pbottom] {
+    &::before {
+      top: calc(100% - 2px);
+    }
+
+    &[aleft]::before {
+      left: 1rem;
+      clip-path: polygon(25% 0, 100% 0, 0% 100%);
+    }
+
+    &[acenter]::before {
+      left: calc(50% - var(--width) / 2);
+      clip-path: polygon(12.5% 0, 87.5% 0, 50% 100%);
+    }
+
+    &[aright]::before {
+      right: 1rem;
+      clip-path: polygon(0 0, 75% 0, 100% 100%);
+    }
+  }
+
+  &[ptop] {
+    &::before {
+      bottom: calc(100% - 2px);
+    }
+
+    &[aleft]::before {
+      left: var(--bbPadding);
+      clip-path: polygon(0 0, 100% 100%, 25% 100%);
+    }
+
+    &[acenter]::before {
+      left: calc(50% - var(--width) / 2);
+      clip-path: polygon(12.5% 100%, 50% 0, 87.5% 100%);
+    }
+
+    &[aright]::before {
+      right: var(--bbPadding);
+      clip-path: polygon(0 100%, 100% 0, 75% 100%);
+    }
+  }
+
+  &[pleft]::before {
+    --height: calc(var(--bbArrowSize) / 2 * 3);
+    width: var(--bbArrowSize);
+    height: var(--height);
+  }
+
+  &[pright] {
+    &::before {
+      --height: calc(var(--bbArrowSize) / 2 * 3);
+      width: var(--bbArrowSize);
+      height: var(--height);
+      left: calc(100% - 2px);
+    }
+
+    &[atop]::before {
+      top: var(--bbPadding);
+      clip-path: polygon(100% 0, 0 100%, 0 25%);
+    }
+
+    &[acenter]::before {
+      top: calc(50% - var(--height) / 2);
+      clip-path: polygon(0 12.5%, 100% 50%, 0 87.5%);
+    }
+
+    &[abottom]::before {
+      bottom: var(--bbPadding);
+      clip-path: polygon(0 0, 100% 100%, 0 75%);
+    }
+  }
+
+  &[pleft] {
+    &::before {
+      right: calc(100% - 2px);
+    }
+
+    &[atop]::before {
+      top: var(--bbPadding);
+      clip-path: polygon(0 0, 100% 25%, 100% 100%);
+    }
+
+    &[acenter]::before {
+      top: calc(50% - var(--height) / 2);
+      clip-path: polygon(0 50%, 100% 12.5%, 100% 87.5%);
+    }
+
+    &[abottom]::before {
+      bottom: var(--bbPadding);
+      clip-path: polygon(0 100%, 100% 0, 100% 75%);
+    }
+  }
+
+  &[pbottom][flip]::before,
+  &[ptop][flip]::before {
+    transform: scaleX(-1);
+  }
+
+  &[pleft][flip]::before,
+  &[pright][flip]::before {
+    transform: scaleY(-1);
+  }
+
+  &[pbottom] {
+    &[aleft] {
+      grid-area: bl;
+    }
+
+    &[acenter] {
+      grid-area: bc;
+    }
+
+    &[aright] {
+      grid-area: br;
+    }
+  }
+
+  &[pright] {
+    &[atop] {
+      grid-area: rt;
+    }
+
+    &[acenter] {
+      grid-area: rc;
+    }
+
+    &[abottom] {
+      grid-area: rb;
+    }
+  }
+
+  &[pleft] {
+    &[atop] {
+      grid-area: lt;
+    }
+
+    &[acenter] {
+      grid-area: lc;
+    }
+
+    &[abottom] {
+      grid-area: lb;
+    }
+  }
+
+  &[ptop] {
+    &[aleft] {
+      grid-area: tl;
+    }
+
+    &[acenter] {
+      grid-area: tc;
+    }
+
+    &[aright] {
+      grid-area: tr;
+    }
+  }
+
+  &[pbottom],
+  &[ptop] {
+    margin: 0;
+  }
+  .title {
+    font-weight: 600;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    margin-bottom: 0.5rem;
+  }
+  img{
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+  }
+  p{
+    color: #000;
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+    &::after{
+      background-image: url(../images/exLink.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      content: '';
+      display: block;
+      height: 10px;
+      width: 10px;
+      flex: 1;
+    }
+  }
+  &:hover{
+    background-color: #037a19;
+    p{
+      color: #FFF;
+    }
+    &::before {
+      background: #037a19;
+       }
+  }
+
+}
+
+.middle code {
+  font-size: 1rem;
+}

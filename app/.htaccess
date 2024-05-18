@@ -1,0 +1,19 @@
+RewriteOptions inherit
+RewriteEngine On
+
+RewriteBase /lab/cinescuela-new/app/
+
+RewriteRule ^([a-zA-Z0-9_-]+)/s/([^/]*)/$ set/$2.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/g/([^/]*)/$ get/$2.php?lang=$1 [L,QSA]
+
+RewriteRule ^$ index.php?lang=es [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/inicio$ home.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/acompanamiento-pedagogico/([^/]*)-([0-9]+)$ pedagogico.php?lang=$1&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ciclos$ ciclos.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ciclos/([A-Za-z0-9-]+)-([0-9]+)$ ciclo.php?lang=$1&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/peliculas$ movies.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/pelicula/([A-Za-z0-9-]+)-([0-9]+)$ intern.php?lang=$1&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/buscar$ search.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/buscar/clasificacion/([^/]*)/([a-zA-Z0-9_-]+)$ search.php?lang=$1&age=$3  [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/buscar/asignatura/([^/]*)/([a-zA-Z0-9_-]+)$ search.php?lang=$1&subject=$3 [L,QSA]

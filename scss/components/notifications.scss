@@ -1,0 +1,27 @@
+.notifications-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  background-color: #037a19;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 320px;
+  ul {
+    li {
+      padding: 10px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      font-size: 14px;
+      border-bottom: 1px solid #fff;
+    }
+  }
+}
+
+.notifications-panel.open {
+  display: block;
+}

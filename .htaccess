@@ -1,0 +1,18 @@
+RewriteOptions inherit
+RewriteEngine On
+
+RewriteBase /lab/cinescuela-new/
+
+RewriteRule ^([a-zA-Z0-9_-]+)/s/([^/]*)/$ set/$2.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/g/([^/]*)/$ get/$2.php?lang=$1 [L,QSA]
+
+RewriteRule ^$ index.php?lang=es [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/peliculas$ movies.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/pelicula/([A-Za-z0-9-]+)-([0-9]+)$ movie.php?lang=$1&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ciclos$ ciclos.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ciclos/([A-Za-z0-9-]+)-([0-9]+)$ ciclo.php?lang=$1&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/informacion/([A-Za-z0-9-]+)-([0-9]+)$ novedades.php?lang=$1&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/obtener-cinescuela$ obtener-cinescuela.php?lang=$1&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/contacto$ contact.php?lang=$1&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/actualidad-educacion$ novedadesList.php?lang=$1&id=$3 [L,QSA]

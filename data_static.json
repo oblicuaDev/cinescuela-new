@@ -1,0 +1,607 @@
+[
+  {
+    "row": "0",
+    "es": "Iniciar sesión",
+    "fr": "Se connecter"
+  },
+  {
+    "row": "1",
+    "es": "Cerrar sesión",
+    "fr": "Fermer la session"
+  },
+  {
+    "row": "2",
+    "es": "Películas",
+    "fr": "Films"
+  },
+  {
+    "row": "3",
+    "es": "Mi cuenta",
+    "fr": "Mon compte"
+  },
+  {
+    "row": "4",
+    "es": "Ciclos",
+    "fr": "Cycles"
+  },
+  {
+    "row": "5",
+    "es": "Educación",
+    "fr": "Éducation"
+  },
+  {
+    "row": "6",
+    "es": "Actualidad",
+    "fr": "Actualité"
+  },
+  {
+    "row": "7",
+    "es": "Mi Cinescuela",
+    "fr": "Ma Cinescuela"
+  },
+  {
+    "row": "8",
+    "es": "Menu Principal",
+    "fr": "Accueil"
+  },
+  {
+    "row": "9",
+    "es": "Con el Apoyo de",
+    "fr": "Ils nous font confiance "
+  },
+  {
+    "row": "10",
+    "es": "Acerca de Cinescuela",
+    "fr": "À propos de Cinescuela"
+  },
+  {
+    "row": "11",
+    "es": "Términos Legales",
+    "fr": "Information légales"
+  },
+  {
+    "row": "12",
+    "es": "Contacto",
+    "fr": "Nous contacter"
+  },
+  {
+    "row": "13",
+    "es": "Inicio de sesión",
+    "fr": "Se connecter"
+  },
+  {
+    "row": "14",
+    "es": "Nombre de Usuario",
+    "fr": "Identifiant"
+  },
+  {
+    "row": "15",
+    "es": "Contraseña",
+    "fr": "Mot de passe"
+  },
+  {
+    "row": "16",
+    "es": "Ingrese su Usuario",
+    "fr": "Identifiant"
+  },
+  {
+    "row": "17",
+    "es": "Ingrese su Contraseña",
+    "fr": "Mot de passe"
+  },
+  {
+    "row": "18",
+    "es": "Iniciar sesión",
+    "fr": "Se connecter"
+  },
+  {
+    "row": "19",
+    "es": "Accediendo..",
+    "fr": "Chargement.."
+  },
+  {
+    "row": "20",
+    "es": "Usuario o contraseña incorrecta, inténtalo de nuevo",
+    "fr": "L' identifiant ou le mot de passe est incorrect"
+  },
+  {
+    "row": "21",
+    "es": "Olvidé mi usuario",
+    "fr": "Identifiant oublié"
+  },
+  {
+    "row": "22",
+    "es": "Olvidé mi contraseña",
+    "fr": "Mot de passe oublié"
+  },
+  {
+    "row": "23",
+    "es": "Iniciando sesión ...",
+    "fr": "Connexion"
+  },
+  {
+    "row": "24",
+    "es": "Recordar Contraseña",
+    "fr": "Récupérer mot de passe"
+  },
+  {
+    "row": "25",
+    "es": "Nombre de Usuario",
+    "fr": "Identifiant"
+  },
+  {
+    "row": "26",
+    "es": "Ingrese el nombre de usuario",
+    "fr": "Identifiant"
+  },
+  {
+    "row": "27",
+    "es": "Recordar Contraseña",
+    "fr": "Récupérer votre mot de passe"
+  },
+  {
+    "row": "28",
+    "es": "Confirmando Información ...",
+    "fr": "Confirmation de l'information.."
+  },
+  {
+    "row": "29",
+    "es": "El usuario que escribiste no existe. Inténtalo de nuevo",
+    "fr": "L 'identifiant n'existe pas. Veuillez le corriger"
+  },
+  {
+    "row": "30",
+    "es": "Revisa tu correo",
+    "fr": "Consultez votre boite de e-mail "
+  },
+  {
+    "row": "31",
+    "es": "PARA CONTINUAR CON EL PROCESO DE REESTABLECER CONTRASEÑA REVISE SU CORREO REGISTRADO.",
+    "fr": "Pour récupérer votre mot de passe, vous recevrez les instructions à votre adresse mail."
+  },
+  {
+    "row": "32",
+    "es": "Volver al login",
+    "fr": "Retourner"
+  },
+  {
+    "row": "33",
+    "es": "Conoce más",
+    "fr": "En voir plus"
+  },
+  {
+    "row": "34",
+    "es": "CONOCE LAS PELÍCULAS DEL MES",
+    "fr": "Découvrir les films "
+  },
+  {
+    "row": "35",
+    "es": "MÁS",
+    "fr": "Plus"
+  },
+  {
+    "row": "36",
+    "es": "Ciclo del mes",
+    "fr": "Cycle du mois"
+  },
+  {
+    "row": "37",
+    "es": "Ir al Ciclo",
+    "fr": " Aller au cycle"
+  },
+  {
+    "row": "38",
+    "es": "Ver todos",
+    "fr": "Tous les cycles"
+  },
+  {
+    "row": "39",
+    "es": "Ver todas las noticias",
+    "fr": "Découvrir toutes les actualités"
+  },
+  {
+    "row": "40",
+    "es": "Comentarios",
+    "fr": "Commentaires"
+  },
+  {
+    "row": "41",
+    "es": "Contenido relacionado",
+    "fr": "Contenu connexe"
+  },
+  {
+    "row": "42",
+    "es": "Todas",
+    "fr": "Tous les films"
+  },
+  {
+    "row": "43",
+    "es": "Destacadas",
+    "fr": "Le plus populaire"
+  },
+  {
+    "row": "44",
+    "es": "Buscar",
+    "fr": "Rechercher"
+  },
+  {
+    "row": "45",
+    "es": "Asignaturas",
+    "fr": "Les Métiers"
+  },
+  {
+    "row": "46",
+    "es": "Tematicas",
+    "fr": "Témoignages"
+  },
+  {
+    "row": "47",
+    "es": "Reproducir",
+    "fr": "Voir le film"
+  },
+  {
+    "row": "48",
+    "es": "Ver trailer",
+    "fr": "Voir la bande annonce"
+  },
+  {
+    "row": "49",
+    "es": "Dirigida por",
+    "fr": "Réalisé par"
+  },
+  {
+    "row": "50",
+    "es": "min",
+    "fr": "Min"
+  },
+  {
+    "row": "51",
+    "es": "Nuestra opinión",
+    "fr": "Notre avis"
+  },
+  {
+    "row": "52",
+    "es": "Acompañamiento Pedagógico",
+    "fr": "Fiche pédagogique"
+  },
+  {
+    "row": "53",
+    "es": "Películas relacionadas",
+    "fr": "Films connexes"
+  },
+  {
+    "row": "54",
+    "es": "Comentarios",
+    "fr": "Commentaires"
+  },
+  {
+    "row": "55",
+    "es": "Películas del ciclo",
+    "fr": "Films du cycle"
+  },
+  {
+    "row": "56",
+    "es": "Ver más",
+    "fr": "Plus encore"
+  },
+  {
+    "row": "57",
+    "es": "Ver más",
+    "fr": "Plus encore"
+  },
+  {
+    "row": "58",
+    "es": "Nombre",
+    "fr": "Nom"
+  },
+  {
+    "row": "59",
+    "es": "Correo Electrónico",
+    "fr": "Adresse e-mail"
+  },
+  {
+    "row": "60",
+    "es": "Asunto",
+    "fr": "Description"
+  },
+  {
+    "row": "61",
+    "es": "Mensaje",
+    "fr": "Votre message"
+  },
+  {
+    "row": "62",
+    "es": "Contáctanos",
+    "fr": "Suggestions"
+  },
+  {
+    "row": "63",
+    "es": "Un nombre Valido es requerido",
+    "fr": "Le champ nom n’est pas correctement complété"
+  },
+  {
+    "row": "64",
+    "es": "Un email valido es requerido",
+    "fr": "Le champ e-mail n’est pas correctement complété"
+  },
+  {
+    "row": "65",
+    "es": "Un Asunto valido es requerido",
+    "fr": "Le champ descrption n’est pas correctement complété"
+  },
+  {
+    "row": "66",
+    "es": "Un mensaje valido es requerido",
+    "fr": "Le champ message n’est pas correctement complété"
+  },
+  {
+    "row": "67",
+    "es": "El nombre es obligatorio",
+    "fr": "Le champ nom est obligatoire"
+  },
+  {
+    "row": "68",
+    "es": "Email obligatorio",
+    "fr": "Le champ e-mail est obligatoire"
+  },
+  {
+    "row": "69",
+    "es": "El asunto es obligatorio",
+    "fr": "Le champ description est obligatoire"
+  },
+  {
+    "row": "70",
+    "es": "El mensaje es obligatorio",
+    "fr": "Le champ message est obligatoire"
+  },
+  {
+    "row": "71",
+    "es": "Mensaje Enviado",
+    "fr": "Message envoyé"
+  },
+  {
+    "row": "72",
+    "es": "Mi cinescuela",
+    "fr": "Ma cinescuela"
+  },
+  {
+    "row": "73",
+    "es": "Sube tu película",
+    "fr": "Charger un film"
+  },
+  {
+    "row": "74",
+    "es": "Películas",
+    "fr": "Films"
+  },
+  {
+    "row": "75",
+    "es": "Acompañamiento pedagógico",
+    "fr": "Soutien éducatif"
+  },
+  {
+    "row": "76",
+    "es": "Actualidad en mi región",
+    "fr": "L' actualité regionale"
+  },
+  {
+    "row": "77",
+    "es": "Próximos eventos",
+    "fr": "Prochains événement"
+  },
+  {
+    "row": "78",
+    "es": "Título de la película",
+    "fr": "Titre"
+  },
+  {
+    "row": "79",
+    "es": "Descripción corta",
+    "fr": "Description"
+  },
+  {
+    "row": "80",
+    "es": "Vínculo de Trailer(Youtube o Vimeo)",
+    "fr": "Lien internet du bande - annonce"
+  },
+  {
+    "row": "81",
+    "es": "Director",
+    "fr": "Réalisateur"
+  },
+  {
+    "row": "82",
+    "es": "Palabras claves relacionadas a la película (separadas por coma)",
+    "fr": "Mot clé du film séparée par une comma"
+  },
+  {
+    "row": "83",
+    "es": "En qué país se relaizo la película?",
+    "fr": "Pays d'origine"
+  },
+  {
+    "row": "84",
+    "es": "Año de realización",
+    "fr": "Sortie"
+  },
+  {
+    "row": "85",
+    "es": "Duración en minutos",
+    "fr": "Durée"
+  },
+  {
+    "row": "86",
+    "es": "Tienes alguna información extra sobre la película?",
+    "fr": "Avez-vous des informations supplémentaires"
+  },
+  {
+    "row": "87",
+    "es": "Sube en dropbox, wetransfer o algun servicio de almacenamiento el archivo de video en alta resolución, el poster, imagenes adicionales (por lo menos 2) y un logo de la película, y envíanos el vínculo de descarga:",
+    "fr": "Charger un film HD sur Dropbox, Wetransfer ou autre. Le film doit avoir un logo, aficche du film, des photos et vous devriez nous envoyer le lien internet pour télecharger"
+  },
+  {
+    "row": "88",
+    "es": "Subir película",
+    "fr": "Charger un film"
+  },
+  {
+    "row": "89",
+    "es": "Gracias por contáctarnos, te responderemos en el menor tiempo posible.",
+    "fr": "Merci de nos communiquer toutes les questions. Nos conseillers répondront à votre demande tout de suite"
+  },
+  {
+    "row": "90",
+    "es": "Publicidad",
+    "fr": "Publicité"
+  },
+  {
+    "row": "91",
+    "es": "Utilidades",
+    "fr": "Outils"
+  },
+  {
+    "row": "92",
+    "es": "Hemos recibido tu mensaje. Nos pondremos en contacto contigo en el menor tiempo posible.",
+    "fr": "Nous avions reçu votre message. Nous allons vous contacter bientôt"
+  },
+  {
+    "row": "93",
+    "es": "Renueva tu contraseña",
+    "fr": "Changer votre mot de passe"
+  },
+  {
+    "row": "94",
+    "es": "Nueva Contraseña",
+    "fr": "Nouveau mot de passe"
+  },
+  {
+    "row": "95",
+    "es": "Vuelva a escribir su contraseña",
+    "fr": "Écrivez le nouveau mot de passe."
+  },
+  {
+    "row": "96",
+    "es": "Las contraseñas deben coincidir",
+    "fr": "Le champ mot de passe et confirmer votre mot de passe doivent être identiques."
+  },
+  {
+    "row": "97",
+    "es": "Cambio de contraseña existoso",
+    "fr": "Vous avez un nouveau mot de passe"
+  },
+  {
+    "row": "98",
+    "es": "Cambiar contraseña",
+    "fr": "Modifier votre mot de passe"
+  },
+  {
+    "row": "99",
+    "es": "Enlace invalido, no es posible continuar con el restablecimiento de la contraseña.",
+    "fr": "Le lien de internet est incorrect. On ne peut pas modifier votre mot de passe"
+  },
+  {
+    "row": "100",
+    "es": "Usuario no activo",
+    "fr": "Déconnexión"
+  },
+  {
+    "row": "101",
+    "es": "Cierre está ventana para continuar",
+    "fr": "Fermer la fenêtre pour continuer"
+  },
+  {
+    "row": "102",
+    "es": "Ciclos",
+    "fr": "Cycles"
+  },
+  {
+    "row": "103",
+    "es": "IR A PELÍCULA",
+    "fr": "Voir le film"
+  },
+  {
+    "row": "104",
+    "es": "RUTA",
+    "fr": "ROUTE"
+  },
+  {
+    "row": "105",
+    "es": "PEDAGÓGICA",
+    "fr": "PÉDAGOGIQUE"
+  },
+  {
+    "row": "106",
+    "es": "COMPRTIR",
+    "fr": "PARTAGER"
+  },
+  {
+    "row": "107",
+    "es": "Presentación",
+    "fr": "Présentation"
+  },
+  {
+    "row": "108",
+    "es": "Película",
+    "fr": "Film"
+  },
+  {
+    "row": "109",
+    "es": "Contexto",
+    "fr": "Contexte"
+  },
+  {
+    "row": "110",
+    "es": "Cultura y sociedad",
+    "fr": "Culture & Société"
+  },
+  {
+    "row": "111",
+    "es": "Notas para el profesor",
+    "fr": "Notes pour l'enseignant"
+  },
+  {
+    "row": "112",
+    "es": "Sinópsis ",
+    "fr": "Synopsis"
+  },
+  {
+    "row": "113",
+    "es": "Ficha tecnica",
+    "fr": "Fiche technique"
+  },
+  {
+    "row": "114",
+    "es": "Reconocimientos",
+    "fr": "Récompenses"
+  },
+  {
+    "row": "115",
+    "es": "Ir al enlace",
+    "fr": "Aller au lien"
+  },
+  {
+    "row": "116",
+    "es": "Ver Listado",
+    "fr": "Voir la liste"
+  },
+  {
+    "row": "117",
+    "es": "ACTIVIDADES COMPLEMENTARIAS",
+    "fr": "ACTIVITÉS COMPLÉMENTAIRES"
+  },
+  {
+    "row": "118",
+    "es": "REPRODUCIR VIDEO",
+    "fr": "LECTURE DE LA VIDÉO"
+  },
+  {
+    "row": "119",
+    "es": "DESCARGAR PDF",
+    "fr": "TÉLÉCHARGER PDF"
+  },
+  {
+    "row": "120",
+    "es": "Ingresa a tu cuenta con tu e-mail y contraseña",
+    "fr": "Connectez-vous à votre compte avec votre adresse e-mail et votre mot de passe."
+  }
+]

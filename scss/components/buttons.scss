@@ -1,0 +1,31 @@
+.btn {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: normal;
+  border-radius: 5px;
+  justify-content: center;
+  color: #fff;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  &-primary {
+    background-color: #037a19;
+    color: #fff;
+    border: 1px solid #037a19;
+    &:hover {
+      border: 1px solid #037a19;
+      background-color: #fff;
+      color: #037a19;
+    }
+  }
+  &-secondary {
+    background-color: rgba($color: #fff, $alpha: 0.3);
+    border: 1px solid #fff;
+    color: #fff;
+    &:hover {
+      background-color: #fff;
+      color: #037a19;
+    }
+  }
+}

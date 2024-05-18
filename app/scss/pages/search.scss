@@ -1,0 +1,28 @@
+.search.cinescuela-app {
+  header {
+    position: static;
+    margin-bottom: 50px;
+    @media only screen and (max-width: 1023px) {
+      position: relative;
+      z-index: 10;
+      background: #000;
+    }
+    & > .container {
+      .left {
+        nav {
+          a {
+            &:not(:nth-child(1)) {
+              span {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  h2 {
+    font-weight: 300;
+    margin-bottom: 42px;
+  }
+}

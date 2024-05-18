@@ -1,0 +1,113 @@
+.fancybox__container:not(.is-compact) .fancybox__slide.has-close-btn {
+  padding: 0;
+}
+.fancybox__content > .f-button.is-close-btn {
+  top: 26px;
+  right: 26px;
+  opacity: 1;
+  mix-blend-mode: difference;
+}
+#dialog-content {
+  .content {
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #161616;
+    max-width: 1080px;
+    width: 100%;
+    margin: 0 auto;
+    @media only screen and (max-width: 1023px) {
+      border-radius: 0;
+    }
+    &-header {
+      height: 480px;
+      position: relative;
+      .image {
+        height: 100%;
+        overflow: hidden;
+        background-color: rgba($color: #000000, $alpha: 0.6);
+        width: 100%;
+        position: relative;
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+          object-position: top;
+        }
+        h2 {
+          bottom: 60px;
+          color: #fff;
+          font-size: 40px;
+          left: 60px;
+          position: absolute;
+          z-index: 12;
+        }
+      }
+      #logoPeli {
+        bottom: 35px;
+        left: 115px;
+        object-fit: contain;
+        position: absolute;
+        filter: drop-shadow(0 0 0.75rem #000);
+        height: 120px;
+        z-index: 2;
+      }
+    }
+    &-body {
+      padding: 20px 50px;
+      gap: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media only screen and (max-width: 1023px) {
+        padding: 20px;
+      }
+      p {
+        font-size: 14px;
+        color: #fff;
+      }
+
+      .left {
+        display: grid;
+        grid-template-columns: 613px auto;
+        gap: 40px 70px;
+        width: 100%;
+        @media only screen and (max-width: 1023px) {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        .actions {
+          grid-column: span 2;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          position: relative;
+          @media only screen and (max-width: 1023px) {
+            grid-column: span 1;
+            flex-direction: column;
+          }
+          a {
+            max-width: 300px;
+            width: 100%;
+            @media only screen and (max-width: 1023px) {
+              max-width: 100%;
+            }
+          }
+          .age {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 0;
+            font-size: 31px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            @media only screen and (max-width: 1023px) {
+              position: static;
+              transform: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
