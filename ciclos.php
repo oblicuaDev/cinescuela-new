@@ -16,23 +16,30 @@
             </div>
         </div>
     </section>
-    <section class="container">
-        <div class="filter-year">
-            <button type="button" onclick="getCiclos('2024')" class="active">2024</button>
-            <button type="button" onclick="getCiclos('2023')">2023</button>
-            <button type="button" onclick="getCiclos('2022')">2022</button>
-            <button type="button" onclick="getCiclos('2021')">2021</button>
-            <button type="button" onclick="getCiclos('2020')">2020</button>
-        </div>
-        <ul class="ciclos-list">
-        </ul>
-        <div class="filter-year">
-            <button type="button" onclick="getCiclos('2024')" class="active">2024</button>
-            <button type="button" onclick="getCiclos('2023')">2023</button>
-            <button type="button" onclick="getCiclos('2022')">2022</button>
-            <button type="button" onclick="getCiclos('2021')">2021</button>
-            <button type="button" onclick="getCiclos('2020')">2020</button>
-        </div>
-    </section>
+    <?php
+        $years = range(2024, 2016); // Rango de años
+        $active_year = 2024; // Año activo
+    ?>
+
+        <section class="container">
+            <?php
+            function renderButtons($years, $active_year) {
+                foreach ($years as $year) {
+                    $class = ($year == $active_year) ? 'class="active"' : '';
+                    echo "<button type=\"button\" onclick=\"getCiclos('$year')\" $class>$year</button>";
+                }
+            }
+            ?>
+
+            <div class="filter-year">
+                <?php renderButtons($years, $active_year); ?>
+            </div>
+            <ul class="ciclos-list">
+            </ul>
+            <div class="filter-year">
+                <?php renderButtons($years, $active_year); ?>
+            </div>
+        </section>
+
 </main>
 <?php include 'includes/footer.php'; ?>

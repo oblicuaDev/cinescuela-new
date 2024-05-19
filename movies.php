@@ -63,9 +63,15 @@
     <ul class="movies-list container " id="movie-container">
         <?php
         if (is_array($posts["response"])) {
-            foreach ($posts["response"] as $post) { ?>
+            foreach ($posts["response"] as $post) { 
+            $theme = false;
+            $acomp = isset($movie['related_cinescuela_ap'][0]) ? $movie['related_cinescuela_ap'][0] : (isset($movie['related_cinescuela_ap']) ? $movie['related_cinescuela_ap'] : null);
+            if (isset($acomp['acf_fields']['presentaciones']['tema_light'])) {
+                $theme = $acomp['acf_fields']['presentaciones']['tema_light'];
+            }
+                ?>
         <li>
-            <a href="<?=$_GET['lang']?>/pelicula/<?=$sdk->get_alias($post->title->rendered)?>-<?=$post->id?>">
+            <a data-temalight="<?=$theme?>" href="<?=$_GET['lang']?>/pelicula/<?=$sdk->get_alias($post->title->rendered)?>-<?=$post->id?>">
                 <img loading="lazy" class="lazyload" src="https://picsum.photos/20/20"
                     data-src="<?=$sdk->replaceUrl($post->acf->imagen_pelicula)?>" alt="<?=$post->title->rendered?>">
                 <img loading="lazy" class="lazyload movieLogo" src="https://picsum.photos/20/20"
@@ -77,6 +83,7 @@
         ?>
 
     </ul>
+    <div class="loader"></div>
     <div id="sentinel"></div>
 </main>
 <?php include 'includes/footer.php'; ?>

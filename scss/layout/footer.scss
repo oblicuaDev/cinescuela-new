@@ -19,12 +19,20 @@
         justify-content: center;
         flex-direction: column;
         color: #111;
-        font-size: 32px;
+        font-size: 25px;
+        line-height: 25px;
 
         strong {
           font-size: 100px;
           line-height: 100px;
           color: #111;
+          font-weight: 400;
+        }
+        span {
+          width: 230px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
         }
       }
     }

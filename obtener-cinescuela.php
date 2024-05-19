@@ -83,60 +83,26 @@
             <a href="" class="btn btn-secondary">Buscar mi plan</a>
         </div>
         <ul>
+            <?php 
+                $planes = $sdk->query("cinescuela-plan");
+                $planes = $planes['response'];
+            for ($i=0; $i < count($planes); $i++) { 
+                $plan = $planes[$i];
+            ?>
             <li>
-                <h4>Premium</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
-                <div class="price">
+                <h4><?=$plan->title->rendered?></h4>
+                <?=$plan->content->rendered?>
+                <!-- <div class="price">
                     <small>Desde</small>
                     <strong>
                         <pre>$</pre>1M
                     </strong>
                     <small>año*</small>
-                </div>
-                <a href="<?=$lang?>/contacto">
-                    <p class="contact">Contacta con Ventas</p>
-</a>
-                <a href="" class="btn btn-primary">Comprar ahora</a>
-                <small>*Ver las condiciones de la oferta* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
+                </div> -->
+                <a href="<?=$lang?>/contacto" class="btn btn-primary">Contacta con Ventas</a>
+                <small><?=$plan->acf->condiciones?></small>
             </li>
-            <li>
-                <h4>Estándar</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
-                <div class="price">
-                    <small>Desde</small>
-                    <strong>
-                        <pre>$</pre>1M
-                    </strong>
-                    <small>año*</small>
-                </div>
-                <a href="<?=$lang?>/contacto">
-                    <p class="contact">Contacta con Ventas</p>
-</a>
-                <a href="" class="btn btn-primary">Comprar ahora</a>
-                <small>*Ver las condiciones de la oferta* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-            </li>
-            <li>
-                <h4>Básico</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
-                <div class="price">
-                    <small>Desde</small>
-                    <strong>
-                        <pre>$</pre>1M
-                    </strong>
-                    <small>año*</small>
-                </div>
-                <a href="<?=$lang?>/contacto">
-                    <p class="contact">Contacta con Ventas</p>
-                </a>
-                <a href="" class="btn btn-primary">Comprar ahora</a>
-                <small>*Ver las condiciones de la oferta* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
-            </li>
+            <?php }?>
         </ul>
     </section>
 </main>

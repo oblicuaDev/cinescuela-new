@@ -4,7 +4,7 @@
     include 'includes/header.php';
     $ciclo = $sdk->getCiclos($_GET['id']);
 ?>
-<main data-movies="<?=json_encode($ciclo->acf->peliculas_del_ciclo)?>" data-cicloid="<?=$_GET['id']?>">
+<main data-movies="<?=json_encode($ciclo->acf->peliculas_del_ciclo)?>" data-cicloid="<?=$_GET['id']?>" data-cicloyear="<?=$ciclo->acf->ano_del_ciclo?>">
     <section class="container">
         <div class="ciclo-mes">
             <img src="<?=$ciclo->acf->imagen_principal_el_ciclo?>" alt="<?=$ciclo->title->rendered?>">

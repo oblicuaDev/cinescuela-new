@@ -1,3 +1,36 @@
+// Función para obtener las películas favoritas desde LocalStorage
+function getFavoriteMovies() {
+  // Intenta obtener el arreglo de películas favoritas desde LocalStorage
+  const favorites = localStorage.getItem("favoriteMovies");
+  // Si no hay nada guardado, devuelve un arreglo vacío
+  return favorites ? JSON.parse(favorites) : [];
+}
+
+// Función para guardar el arreglo de películas favoritas en LocalStorage
+function saveFavoriteMovies(favoriteMovies) {
+  // Convierte el arreglo de películas a una cadena JSON y guárdalo en LocalStorage
+  localStorage.setItem("favoriteMovies", JSON.stringify(favoriteMovies));
+}
+
+// Función para agregar una película a las favoritas
+function addMovieToFavorites(movie) {
+  // Obtiene las películas favoritas actuales
+  const favoriteMovies = getFavoriteMovies();
+  // Verifica si la película ya está en la lista de favoritas
+  const movieExists = favoriteMovies.some(
+    (favMovie) => favMovie.id === movie.id
+  );
+  if (!movieExists) {
+    // Si la película no está en la lista, la agrega
+    favoriteMovies.push(movie);
+    // Guarda el nuevo arreglo de películas favoritas en LocalStorage
+    saveFavoriteMovies(favoriteMovies);
+    console.log("Película agregada a favoritos:", movie);
+  } else {
+    console.log("La película ya está en la lista de favoritos.");
+  }
+}
+
 function lazyImages() {
   if ("loading" in HTMLImageElement.prototype) {
     const images = document.querySelectorAll("img.lazyload");

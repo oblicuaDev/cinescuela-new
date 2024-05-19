@@ -35,17 +35,17 @@
             <img src="images/logos.png" alt="logos">
         </div>
         <div class="links">
-            <a href="">Nuestro catálogo</a>
-            <a href="">Ciclos</a>
-            <a href="">Acompañamientos pedagógicos</a>
-            <a href="">Actualidad y Educación</a>
-            <a href="">Obtén Cinescuela</a>
+            <a href="<?=$lang?>/peliculas">Nuestro catálogo</a>
+            <a href="<?=$lang?>/ciclos">Ciclos</a>
+            <a href="<?=$lang?>/acompanamientos-pedagogicos">Acompañamientos pedagógicos</a>
+            <a href="<?=$lang?>/actualidad-educacion">Actualidad y Educación</a>
+            <a href="<?=$lang?>/obtener-cinescuela">Obtén Cinescuela</a>
         </div>
         <div class="links">
-            <a href="">Obtén Cinescuela</a>
-            <a href="">Términos y condiciones</a>
-            <a href="">Iniciar Sesión</a>
-            <a href="">Contacto</a>
+            <a href="<?=$lang?>/obtener-cinescuela">Obtén Cinescuela</a>
+            <a href="<?=$lang?>/terminos-condiciones">Términos y condiciones</a>
+            <a href="app/">Iniciar Sesión</a>
+            <a href="<?=$lang?>/contacto">Contacto</a>
         </div>
     </div>
     <div class="copy"><?=$sdk->generalInfo->acf->copyright?></div>

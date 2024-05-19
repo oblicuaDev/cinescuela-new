@@ -237,7 +237,7 @@ class Cinescuela {
         $peliculas = $this->consultarRecursos("posts", $ids, "", "GET", $page, $per_page,  $extra, true);
         return $peliculas;
     }
-    function getAllNovedades($ids = "", $page = 1, $per_page = 15, $extra = []){
+    function getAllNovedades($ids = "", $page = 1, $per_page = 15, $extra = ["order"=>"asc"]){
         $peliculas = $this->consultarRecursos("posts", $ids, "", "GET", $page, $per_page,  $extra, true);
         return $peliculas;
     }

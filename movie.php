@@ -7,7 +7,7 @@
     // Escapamos las comillas para evitar problemas con el HTML
     $post_json_escaped = htmlspecialchars($post_json, ENT_QUOTES, 'UTF-8');
 ?>
-<main data-moviesrel="<?=$post_json_escaped?>" >
+<main data-moviesrel="<?=$post_json_escaped?>" data-movieid="<?=$_GET["id"]?>" >
 <div class="banner">
     <video autoplay="" muted="" poster="<?= $movie->acf->imagen_pelicula?>" data-postermobile="<?= $movie->acf->afiche?>"></video>
     <div class="container">
@@ -31,38 +31,19 @@
                 <a href="<?=$lang?>/pelicula/<?=$sdk->get_alias( $movie->title->rendered)?>-<?= $movie->id?>" class="btn btn-primary">Inicia sesión para reproducir</a>
             </div>
         </div>
-        <div class="video-actions">
-            <button><svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M9.48223 5.73223C9.95107 5.26339 10.587 5 11.25 5H28.75C29.413 5 30.0489 5.26339 30.5178 5.73223C30.9866 6.20108 31.25 6.83696 31.25 7.5V35C31.25 35.4544 31.0034 35.873 30.606 36.0933C30.2085 36.3136 29.7228 36.3008 29.3375 36.06L20 30.2241L10.6625 36.06C10.2772 36.3008 9.79148 36.3136 9.39404 36.0933C8.9966 35.873 8.75 35.4544 8.75 35V7.5C8.75 6.83696 9.01339 6.20107 9.48223 5.73223ZM28.75 7.5H11.25L11.25 32.7447L19.3375 27.69C19.7428 27.4367 20.2572 27.4367 20.6625 27.69L28.75 32.7447V7.5Z"
-                        fill="currentColor" />
-                </svg>
-            </button>
-            <button id="sound"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M19.4394 3.10169C19.7824 3.2695 20 3.61807 20 4.00001V28C20 28.3819 19.7824 28.7305 19.4394 28.8983C19.0963 29.0661 18.6875 29.0238 18.3861 28.7894L9.65689 22H4C3.46957 22 2.96086 21.7893 2.58579 21.4142C2.21071 21.0391 2 20.5304 2 20V12C2 11.4696 2.21071 10.9609 2.58579 10.5858C2.96086 10.2107 3.46957 10 4 10H9.65689L18.3861 3.21066C18.6875 2.97617 19.0963 2.93389 19.4394 3.10169ZM18 6.04465L10.6139 11.7894C10.4384 11.9259 10.2224 12 10 12H4V20H10C10.2224 20 10.4384 20.0741 10.6139 20.2107L18 25.9554V6.04465Z"
-                        fill="currentColor" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M30.7071 12.2929C31.0976 12.6834 31.0976 13.3166 30.7071 13.7071L24.7071 19.7071C24.3166 20.0976 23.6834 20.0976 23.2929 19.7071C22.9024 19.3166 22.9024 18.6834 23.2929 18.2929L29.2929 12.2929C29.6834 11.9024 30.3166 11.9024 30.7071 12.2929Z"
-                        fill="currentColor" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M23.2929 12.2929C23.6834 11.9024 24.3166 11.9024 24.7071 12.2929L30.7071 18.2929C31.0976 18.6834 31.0976 19.3166 30.7071 19.7071C30.3166 20.0976 29.6834 20.0976 29.2929 19.7071L23.2929 13.7071C22.9024 13.3166 22.9024 12.6834 23.2929 12.2929Z"
-                        fill="currentColor" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M10 10C10.5523 10 11 10.4477 11 11V21C11 21.5523 10.5523 22 10 22C9.44772 22 9 21.5523 9 21V11C9 10.4477 9.44772 10 10 10Z"
-                        fill="currentColor" />
-                </svg>
-            </button>
-        </div>
     </div>
 </div>
 <div class="container">
     <section class="sinopsis">
             <img src="<?= $movie->acf->afiche?>" alt="<?= $movie->title->rendered?>">
         <article class="info">
-            <h1><?= $movie->title->rendered?></h1>
+            <div class="info-header">
+                <h1><?= $movie->title->rendered?></h1>
+                <div class="clasificacion">
+                <h3>Clasificación</h3>
+                <strong><?= $movie->acf->grupo_de_ed[0]->post_title; ?></strong>
+                </div>
+            </div>
             <span class="director"><?= $movie->acf->director_pelicula?></span>
             <span class="pais"><?= $movie->acf->pais_pelicula?> <?= $movie->acf->pais_pelicula?></span>
             <span class="duracion"><?= $movie->acf->duracion_en_minutos?></span>
@@ -99,7 +80,10 @@
     
     </section>
     <section class="ciclosRel">
-        <h2>Ciclo a el(los) que pertenece</h2>
+        <h2>Ciclo a los que pertenece</h2>
+        <ul class="ciclos-list">
+
+        </ul>
     </section>
     <section class="moviesRel">
         <h2>Películas relacionadas</h2>

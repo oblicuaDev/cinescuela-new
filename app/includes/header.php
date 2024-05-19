@@ -61,7 +61,7 @@
     </div>
     <div class="bottom-bar">
         <div class="left">
-            <a href="" class="logo">
+            <a href="<?=$lang?>/inicio" class="logo">
                 <img src="images/logo.png" alt="logo">
             </a>
             <nav>
