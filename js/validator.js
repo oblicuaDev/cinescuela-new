@@ -37,6 +37,10 @@ class FormValidator {
     if (document.querySelector(`#login button[type="submit"]`)) {
       document.querySelector(`#login button[type="submit"]`).innerHTML =
         findUiWord(23, lang);
+    } else {
+      this.form.querySelector(
+        `button[type="submit"]`
+      ).innerHTML = `Enviando...`;
     }
 
     // Make AJAX request
@@ -69,7 +73,11 @@ class FormValidator {
     if (field.value.trim() === "") {
       this.setStatus(
         field,
-        `${field.previousElementSibling.innerText} es obligatorio`,
+        `${
+          field.previousElementSibling
+            ? field.previousElementSibling.innerText
+            : field.placeholder
+        } es obligatorio`,
         "error"
       );
       return false;
@@ -129,4 +137,89 @@ class FormValidator {
       field.classList.add("input-error");
     }
   }
+}
+
+const loginForm = document.querySelector("#login");
+if (loginForm) {
+  const LoginFormFields = ["username", "password"];
+  // Función de manejo de respuesta dinámica Login
+  function handleResponse(data) {
+    if (data == "2") {
+      document.querySelector(`#login button[type="submit"]`).innerHTML =
+        findUiWord(18, lang);
+      document.querySelector('.error-message').innerHTML = findUiWord(100, lang);
+    } else if (data == "0") {
+      document.querySelector(`#login button[type="submit"]`).innerHTML =
+        findUiWord(18, lang);
+      document.querySelector('.error-message').innerHTML = findUiWord(20, lang);
+    } else {
+      fadeIn(preloader);
+      location.href = lang + "/inicio";
+    }
+  }
+  const validator = new FormValidator(
+    loginForm,
+    LoginFormFields,
+    handleResponse
+  );
+
+  validator.initialize();
+}
+const contactForm = document.querySelector("#contact");
+if (contactForm) {
+  const fieldsContactForm = [
+    "name",
+    "institucion",
+    "email",
+    "city",
+    "politics",
+  ];
+  // Función de manejo de respuesta dinámica Login
+  function handleResponse(data) {
+    if (data.response) {
+      fadeOut(document.querySelector("#contact"));
+      document.querySelector(".thanks").style.display = "flex";
+    }
+  }
+  const validator = new FormValidator(
+    contactForm,
+    fieldsContactForm,
+    handleResponse
+  );
+
+  validator.initialize();
+}
+const buzonForm = document.querySelector("#buzon");
+if (buzonForm) {
+  const fieldsBuzonForm = ["content"];
+  // Función de manejo de respuesta dinámica Login
+  function handleResponse(data) {
+    fadeOut(document.querySelector("#buzon"));
+    closeModalBuzon();
+    document.querySelector(".thanks").style.display = "flex";
+  }
+  const validator = new FormValidator(
+    buzonForm,
+    fieldsBuzonForm,
+    handleResponse
+  );
+
+  validator.initialize();
+}
+const sugerenciaForm = document.querySelector("#sugerencia");
+if (sugerenciaForm) {
+  const fieldssugerenciaForm = ["contentSug"];
+  // Función de manejo de respuesta dinámica Login
+  function handleResponse(data) {
+    fadeOut(document.querySelector("#sugerencia"));
+    document.querySelector(".thanks").style.display = "flex";
+    closeModalSugerencia();
+  }
+  const validator = new FormValidator(
+    sugerenciaForm,
+    fieldssugerenciaForm,
+    handleResponse
+  );
+
+  validator.initialize();
 }

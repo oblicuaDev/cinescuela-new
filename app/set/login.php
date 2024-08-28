@@ -13,16 +13,17 @@
     if(empty($user)){
         echo json_encode('0');
     }else{
+
         if($user->acf->usuario_activo == '1'){
-            $userInfo = $sdk->getInfoUser($user->id);
+            $userInfo = $sdk->getInfoUser(strval($user->id));
             $userInfo = $userInfo->related_cinescuela_profiles;
             $ipVerified = true;
-            
             if (isset($user->acf->ips) && $user->acf->ips !== '') {
                 $ips = explode(',', $user->acf->ips);
                 $theIp = '-'.getRealIP().'-';
                 $ipVerified = in_array($theIp, $ips);
             }
+
             if($user->acf->contrasena_antigua == "" && isset($user->acf->contrasena) || $user->acf->contrasena_antigua != "" && isset($user->acf->contrasena) ){
                 // URL de la API REST en tu sitio de WordPress
                 $request_url = 'https://webadmin.cinescuela.org/wp-json/cinescuela/v1/validate-password/';

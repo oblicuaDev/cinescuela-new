@@ -5,9 +5,7 @@ body {
   font-family: var(--font-primary);
   color: #fff;
   font-optical-sizing: auto;
-  @media only screen and (max-width: 1023px) {
-    padding-bottom: 120px;
-  }
+  overflow-x: hidden;
 }
 
 h1 {
@@ -15,7 +13,7 @@ h1 {
   font-style: normal;
   font-weight: bold;
   font-size: 32px;
-  line-height: 70px;
+  line-height: 35px;
 }
 
 h2 {
@@ -64,7 +62,7 @@ p,
 li {
   color: var(--textos);
   font-family: var(--font-primary);
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 300;
   letter-spacing: 0.02em;

@@ -1,0 +1,56 @@
+.cinescuela-app {
+  &.kit {
+    background-color: #000;
+    header {
+      position: relative;
+      margin-bottom: 80px;
+      @media only screen and (max-width: 1023px) {
+        position: relative;
+        z-index: 10;
+        background: #000;
+      }
+    }
+    section {
+      padding: 50px 0;
+      h2 {
+        margin-bottom: 30px;
+      }
+      article {
+        padding: 20px 0;
+        ul {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 30px;
+          margin-bottom: 30px;
+          li {
+            flex: 1;
+            a {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
+              svg {
+                width: 50px;
+                height: 50px;
+                transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                margin-bottom: 15px;
+              }
+              span {
+                font-size: 16px;
+                line-height: 16px;
+                font-weight: bold;
+              }
+              &:hover {
+                color: #037a19;
+                svg {
+                  transform: translateY(-10px);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

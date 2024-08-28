@@ -1,85 +1,5 @@
-.TabList ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-.TabList ul li {
-  display: inline-block;
-  vertical-align: middle;
-  padding-right: 10px;
-  margin-right: -4px;
-}
-.TabList ul li a {
-  border-radius: 25px;
-  position: relative;
-  text-decoration: none;
-  font-size: 14px;
-  padding: 10px 30px;
-  text-align: center;
-  display: block;
-  border: 1px solid #1d1d1d;
-  background: #1d1d1d;
-  color: #818181;
-}
-.TabList ul li a svg {
-  width: 40px;
-  vertical-align: middle;
-  height: auto;
-  padding-right: 10px;
-}
-.TabList ul li a span.RightRectangle4 {
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  background: #037a19;
-  transform: rotate(45deg) translateY(-70%);
-  top: 50%;
-  right: 50%;
-  z-index: -1;
-  transition: all ease 0.4s;
-}
-.TabList ul li.current a {
-  text-decoration: none;
-  border: 1px solid #037a19;
-  background: #037a19;
-  color: #fff;
-}
-.TabList ul li a:hover span.RightRectangle4,
-.TabList ul li.current a span.RightRectangle4 {
-  top: 92%;
-}
-.TabList ul li a svg path {
-  fill: #818181;
-}
-.TabList ul li.current a svg path {
-  fill: #fff;
-}
-.TabList ul li a:hover svg path {
-  fill: #fff;
-}
-.TabList ul li a:hover {
-  border: 1px solid #037a19;
-  background: #037a19;
-  color: #fff;
-}
-.TabsMainColRight {
-  padding-top: 10px;
-}
-.TabContent {
-  display: none;
-}
-
-.TabContentInner {
-  padding: 30px;
-  background: #1d1d1d;
-}
-
-.TabContent.active {
-  display: grid;
-  animation: fadeInUp 0.6s ease;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
+$color_1: #818181;
+$color_2: #fff;
 
 @-webkit-keyframes fadeInUp {
   from {
@@ -87,36 +7,184 @@
     -webkit-transform: translate3d(0, 25px, 0);
     transform: translate3d(0, 25px, 0);
   }
-
   to {
     opacity: 1;
     -webkit-transform: none;
     transform: none;
   }
 }
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
     -webkit-transform: translate3d(0, 25px, 0);
     transform: translate3d(0, 25px, 0);
   }
-
   to {
     opacity: 1;
     -webkit-transform: none;
     transform: none;
   }
 }
-@media (max-width: 992px) {
-  .TabList ul li a span.RightRectangle4 {
-    display: none;
+.TabList {
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      vertical-align: middle;
+      padding-right: 10px;
+      margin-right: -4px;
+      a {
+        border-radius: 25px;
+        position: relative;
+        text-decoration: none;
+        font-size: 14px;
+        padding: 10px 30px;
+        text-align: center;
+        display: block;
+        border: 1px solid #1d1d1d;
+        background: #1d1d1d;
+        color: $color_1;
+        svg {
+          width: 40px;
+          vertical-align: middle;
+          height: auto;
+          padding-right: 10px;
+          path {
+            fill: #818181;
+          }
+        }
+        span.RightRectangle4 {
+          position: absolute;
+          width: 25px;
+          height: 25px;
+          background: #037a19;
+          transform: rotate(45deg) translateY(-70%);
+          top: 50%;
+          right: 50%;
+          z-index: -1;
+          transition: all ease 0.4s;
+        }
+        &:hover {
+          span.RightRectangle4 {
+            top: 92%;
+          }
+          svg {
+            path {
+              fill: #fff;
+            }
+          }
+          border: 1px solid #037a19;
+          background: #037a19;
+          color: $color_2;
+        }
+      }
+      button {
+        border-radius: 25px;
+        position: relative;
+        text-decoration: none;
+        font-size: 14px;
+        padding: 10px 30px;
+        text-align: center;
+        display: block;
+        border: 1px solid #1d1d1d;
+        background: #1d1d1d;
+        color: $color_1;
+        svg {
+          width: 40px;
+          vertical-align: middle;
+          height: auto;
+          padding-right: 10px;
+          path {
+            fill: #818181;
+          }
+        }
+        span.RightRectangle4 {
+          position: absolute;
+          width: 25px;
+          height: 25px;
+          background: #037a19;
+          transform: rotate(45deg) translateY(-70%);
+          top: 50%;
+          right: 50%;
+          z-index: -1;
+          transition: all ease 0.4s;
+        }
+        &:hover {
+          span.RightRectangle4 {
+            top: 92%;
+          }
+          svg {
+            path {
+              fill: #fff;
+            }
+          }
+          border: 1px solid #037a19;
+          background: #037a19;
+          color: $color_2;
+        }
+      }
+    }
+    li.current {
+      button {
+        text-decoration: none;
+        border: 1px solid #037a19;
+        background: #037a19;
+        color: $color_2;
+      }
+      a {
+        text-decoration: none;
+        border: 1px solid #037a19;
+        background: #037a19;
+        color: $color_2;
+        span.RightRectangle4 {
+          top: 92%;
+        }
+        svg {
+          path {
+            fill: #fff;
+          }
+        }
+      }
+    }
   }
-
-  .TabList ul li {
-    display: block;
-    vertical-align: middle;
-    padding: 5px 0;
-    margin-right: -4px;
+}
+.TabsMainColRight {
+  padding-top: 10px;
+}
+.TabContent {
+  display: none;
+}
+.TabContentInner {
+  padding: 30px;
+  background: #1d1d1d;
+}
+.TabContent.active {
+  display: grid;
+  animation: fadeInUp 0.6s ease;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@media (max-width: 992px) {
+  .TabList {
+    ul {
+      li {
+        button {
+          span.RightRectangle4 {
+            display: none;
+          }
+        }
+        a {
+          span.RightRectangle4 {
+            display: none;
+          }
+        }
+        display: block;
+        vertical-align: middle;
+        padding: 5px 0;
+        margin-right: -4px;
+      }
+    }
   }
 }

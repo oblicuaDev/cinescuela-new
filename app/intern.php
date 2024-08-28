@@ -7,6 +7,19 @@
 ?>
 
     <div class="videos">
+        <div class="overlayMovie">
+            <?php if($movie->acf->logo_de_la_pelicula && $movie->acf->logo_de_la_pelicula != ""){ ?>
+                <img src="<?=$movie->acf->logo_de_la_pelicula?>" alt="Logo Pelicula">
+            <?php }else{ ?>
+                <span class="title-movie"><?=$movie->title->rendered?></span>
+            <?php } ?>
+            <div class="sinopsis">
+                <h2>Sinópsis</h2>
+                <?=$movie->content->rendered?>
+            </div>
+        </div>
+        <a href="<?=$lang?>/inicio" class="backArrow"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve"><path fill="#FFFFFF" d="M31.678,18.698h-19.94l5.103-6.059c0.533-0.634,0.452-1.58-0.182-2.114 c-0.633-0.533-1.579-0.451-2.113,0.181l-7.213,8.565c-0.48,0.57-0.469,1.407,0.028,1.964l7.213,8.09 c0.296,0.333,0.707,0.502,1.12,0.502c0.354,0,0.711-0.125,0.997-0.381c0.618-0.551,0.673-1.499,0.121-2.117l-5.021-5.632h19.887 c0.828,0,1.5-0.672,1.5-1.5S32.506,18.698,31.678,18.698z"/></svg></a>
+        <div class="userName"><?=$_SESSION['logged']['usu_us']?></div>
         <div class="video-container">
             <video id="videoEl"
                 src="<?=$movie->acf->link_pelicula?>"
@@ -24,7 +37,7 @@
             <div class="mode">
                 <div class="toggle-switch">
                     <input type="checkbox" class="theme-checkbox" onchange="toggleMode()">
-                    <p>Activar Modo pedagógico</p>
+                    <p>Modo pedagógico</p>
                 </div>
             </div>
             <div class="top-controls">
@@ -45,17 +58,17 @@
                 <div class="left-controls">
                     <button data-title="Play (k)" id="playButton" onclick="togglePlay()">
                         <svg class="playback-icons">
-                            <use href="#play-icon"></use>
+                            <use href="#play-icon" ></use>
                             <use href="#pause" class="hidden"></use>
                         </svg>
                     </button>
 
                     <div class="volume-controls">
-                        <button data-title="Mute (m)" class="volume-button" id="volume-button" onclick="toggleMute()">
+                        <button data-title="Mute (m)" class="volume-button" id="volumeButton" onclick="toggleMute()">
                             <svg>
-                                <use class="hidden" href="#volume-mute"></use>
-                                <use class="hidden" href="#volume-low"></use>
-                                <use href="#volume-high"></use>
+                                <use class="hidden" id="volumemute" href="#volume-mute"></use>
+                                <use class="hidden" id="volumelow" href="#volume-low"></use>
+                                <use id="volumehigh" href="#volume-high"></use>
                             </svg>
                         </button>
 
@@ -65,11 +78,28 @@
                 </div>
 
                 <div class="right-controls">
-                    <button data-title="Full screen (f)" class="fullscreen-button" id="fullscreen-button"
+                    <!-- <button data-title="Activar Totems" onclick="activeTotems()" id="active-totems">
+                    <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_26_8)">
+    <path d="M17.23 34.33C16.66 34.33 16.12 34 15.87 33.46C14.96 31.5 13.7 29.17 13.08 28.41H1.5C0.67 28.41 0 27.74 0 26.91V1.5C0 0.67 0.67 0 1.5 0H32.93C33.76 0 34.43 0.67 34.43 1.5V26.5C34.43 27.33 33.76 28 32.93 28H21.7C20.34 30.06 18.94 32.36 18.72 33C18.65 33.63 18.18 34.15 17.55 34.29C17.44 34.31 17.33 34.33 17.23 34.33ZM3 25.41H13.54C14.18 25.41 15.08 25.41 17.23 29.44C17.8 28.49 18.58 27.26 19.65 25.66C19.93 25.25 20.39 25 20.89 25H31.43V3H3V25.41Z" fill="currentColor"/>
+    <path d="M8.63999 16.22C9.93233 16.22 10.98 15.1723 10.98 13.88C10.98 12.5877 9.93233 11.54 8.63999 11.54C7.34764 11.54 6.29999 12.5877 6.29999 13.88C6.29999 15.1723 7.34764 16.22 8.63999 16.22Z" fill="currentColor"/>
+    <path d="M17.31 16.22C18.6023 16.22 19.65 15.1723 19.65 13.88C19.65 12.5877 18.6023 11.54 17.31 11.54C16.0176 11.54 14.97 12.5877 14.97 13.88C14.97 15.1723 16.0176 16.22 17.31 16.22Z" fill="currentColor"/>
+    <path d="M25.79 16.22C27.0824 16.22 28.13 15.1723 28.13 13.88C28.13 12.5877 27.0824 11.54 25.79 11.54C24.4977 11.54 23.45 12.5877 23.45 13.88C23.45 15.1723 24.4977 16.22 25.79 16.22Z" fill="currentColor"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_26_8">
+      <rect width="34.43" height="34.33" fill="currentColor"/>
+    </clipPath>
+  </defs>
+</svg>
+
+
+                    </button> -->
+                    <button data-title="Full screen (f)" class="fullscreen-button" id="fullscreenButton"
                         onclick="toggleFullScreen()">
                         <svg>
-                            <use href="#fullscreen"></use>
-                            <use href="#fullscreen-exit" class="hidden"></use>
+                            <use href="#fullscreen" class="hidden"></use>
+                            <use href="#fullscreen-exit" ></use>
                         </svg>
                     </button>
                 </div>
@@ -78,11 +108,13 @@
     </div>
     <main data-movieid="<?=$_GET['id']?>">
         <section class="movie-grid">
-            <img src="<?=$movie->acf->logo_de_la_pelicula?>" alt="Logo Pelicula">
+            <?php if($movie->acf->logo_de_la_pelicula && $movie->acf->logo_de_la_pelicula != ""){ ?>
+                <img src="<?=$movie->acf->logo_de_la_pelicula?>" alt="Logo Pelicula">
+            <?php } ?>
             <div class="col movie">
                 <div class="toggle-switch">
                     <input type="checkbox" class="theme-checkbox" onchange="toggleMode()">
-                    <p>Activar Modo pedagógico</p>
+                    <p>Modo pedagógico</p>
                 </div>
                 <!-- <span class="age">13+</span> -->
                 <a href="<?=$lang?>/acompanamiento-pedagogico/<?=$sdk->get_alias($movie->title->rendered)?>-<?=$movie->id?>" class="btn btn-primary">Ver acompañamiento pedagógico completo</a>
@@ -101,6 +133,7 @@
                     }
                     ?>
                 </ul>
+                <!-- <button type="button" onclick="openModalSugerencia('Keyword')" class="btn btn-primary sugerencia">Crear sugerencia</button> -->
                 <div class="reconocimientos">
                     <h2>Reconocimientos</h2>
                     <ul>
@@ -123,10 +156,12 @@
                     <li class="skeleton"><img loading="lazy" class="lazyload" src="https://picsum.photos/20/20"
                             data-src="https://placehold.co/230x297" alt="Logo Pelicula"></li>
                 </ul>
-                <a href="<?=$lang?>/acompanamiento-pedagogico/<?=$sdk->get_alias($movie->title->rendered)?>-<?=$movie->id?>?tabactive=cultura-y-sociedad" class="btn btn-primary">Ver sección completa</a>
+                <div class="actions">
+                    <a href="<?=$lang?>/acompanamiento-pedagogico/<?=$sdk->get_alias($movie->title->rendered)?>-<?=$movie->id?>?tabactive=cultura-y-sociedad" class="btn btn-primary">Ver sección completa</a>
+                    <button type="button" onclick="openModalSugerencia('Recurso de cultura y sociedad')" class="btn btn-primary sugerencia">Crear sugerencia</button>
+                </div>
             </div>
         </section>
-
     </main>
     <svg style="display: none">
         <defs>

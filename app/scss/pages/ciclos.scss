@@ -2,7 +2,7 @@
   &.ciclos {
     background-color: #000;
     header {
-      position: static;
+      position: relative;
       margin-bottom: 80px;
       @media only screen and (max-width: 1023px) {
         position: relative;
@@ -39,7 +39,7 @@
   &.ciclo {
     background-color: #000;
     header {
-      position: static;
+      position: relative;
       margin-bottom: 80px;
       @media only screen and (max-width: 1023px) {
         position: relative;

@@ -1,0 +1,44 @@
+.cinescuela-page.terminos {
+  header {
+    background-color: #000000;
+    position: relative;
+    margin-bottom: 80px;
+    @media only screen and (max-width: 1023px) {
+      position: relative;
+      z-index: 10;
+      background: #000;
+    }
+  }
+  main {
+    color: #111;
+    min-height: 100vh;
+    max-width: 768px;
+    margin: 0 auto;
+    text-align: justify;
+    p {
+      font-size: 14px;
+      line-height: 22px;
+      margin-bottom: 15px;
+      font-weight: 400;
+      a {
+        font-size: 14px;
+        line-height: 22px;
+        text-decoration: underline;
+        color: #037a19;
+        span{
+          color: #037a19 !important;
+          font-weight: bold;
+
+        }
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+    }
+    img {
+      display: block;
+      width: 100%;
+      margin: 0 auto 30px;
+    }
+  }
+}

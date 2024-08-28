@@ -3,15 +3,16 @@
     include 'includes/head.php';
     $movie = $sdk->getPeliculas($_GET['id']);
     $acomp = $movie->related_cinescuela_ap;
-    $acomp = $acomp->acf_fields;
     $culturaSociedad = $sdk->getCS($acomp->id);
+    $acomp = $acomp->acf_fields;
+    $moviesIDs = array_map('strval', $_SESSION['logged']['perfil_de_usuario'][0]->peliculas_del_ciclo);
 ?>
 <header class="acomp_header">
     <div class="container">
         <img src="<?=$movie->acf->logo_de_la_pelicula?>" alt="Logo Pelicula">
         <div class="actions">
-            <?php if($movie->acf->acompanamiento_pedagogico_privado){ ?>
-                <a href="/lab/cinescuela-page/<?=$lang?>/pelicula/<?=$sdk->get_alias($movie->title->rendered)?>-<?=$movie->id?>"
+            <?php if(!isset($_SESSION['logged'])){ ?>
+                <a href="<?=$lang?>/pelicula/<?=$sdk->get_alias($movie->title->rendered)?>-<?=$movie->id?>"
                     class="btn btn-primary"><svg width="50" height="50" viewBox="0 0 50 50" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -158,6 +159,18 @@
                     </div>
                 </details>
             </article>
+            <section>
+
+                <ul class="tags">
+                    <?php 
+                    $tags = explode(',', $movie->acf->palabras_clave_de_esta_publicacion);
+                    for ($i=0; $i < count($tags); $i++) { 
+                        echo "<li>$tags[$i]</li>";
+                    }
+                    ?>
+                </ul>
+                <button type="button" onclick="openModalSugerencia('Keyword')" class="btn btn-primary sugerencia">Crear sugerencia</button>
+            </section>
         </section>
         <section class="tab <?=isset($_GET['tabactive']) && $_GET['tabactive'] == $sdk->get_alias('Lenguaje') ? 'tab-active' : ''?>" id="<?=$sdk->get_alias("Lenguaje")?>">
             <div class="TabsMainSection">
@@ -212,7 +225,8 @@
                                             <path
                                                 d="M20 16.875C21.0355 16.875 21.875 16.0355 21.875 15C21.875 13.9645 21.0355 13.125 20 13.125C18.9645 13.125 18.125 13.9645 18.125 15C18.125 16.0355 18.9645 16.875 20 16.875Z"
                                                 fill="white" />
-                                        </svg>Actividades Complementarias</h2>
+                                        </svg>Actividades Complementarias  <button type="button" onclick="openModalSugerencia('Actividad complementaria')" class="btn btn-primary sugerencia">Crear sugerencia</button></h2>
+                                        
                                    
                                     <div class="content">
                                         <!-- Slider main container -->
@@ -242,6 +256,7 @@
                     </div>
                 </div>
             </div>
+           
         </section>
         <section class="tab <?=isset($_GET['tabactive']) && $_GET['tabactive'] == $sdk->get_alias('Contexto') ? 'tab-active' : ''?> " id="<?=$sdk->get_alias("Contexto")?>">
             <div class="TabsMainSection">
@@ -254,8 +269,7 @@
                                     $actividad = $acomp->contexto->{"actividad_$i"}; 
                                     if($actividad->titulo != ""){
                                 ?>
-                                <li data-name="Tab<?=$i?>"><a class="medium"
-                                        href="javascript:void(0);"><?=$actividad->titulo?> </a></li>
+                                <li data-name="Tab<?=$i?>"><button class="medium"><?=$actividad->titulo?> </button></li>
                                 <?php }} ?>
                             </ul>
                         </div>
@@ -296,7 +310,7 @@
                                         <path
                                             d="M20 16.875C21.0355 16.875 21.875 16.0355 21.875 15C21.875 13.9645 21.0355 13.125 20 13.125C18.9645 13.125 18.125 13.9645 18.125 15C18.125 16.0355 18.9645 16.875 20 16.875Z"
                                             fill="white" />
-                                    </svg>Actividades Complementarias</h2>
+                                    </svg>Actividades Complementarias   <button type="button" onclick="openModalSugerencia('Actividad complementaria')" class="btn btn-primary sugerencia">Crear sugerencia</button></h2>
                                
                                 <div class="content">
                                       <!-- Slider main container -->
@@ -324,21 +338,70 @@
                     </div>
                 </div>
             </div>
+          
         </section>
         <section class="tab <?=isset($_GET['tabactive']) && $_GET['tabactive'] == $sdk->get_alias('Cultura y sociedad') ? 'tab-active' : ''?>" id="<?=$sdk->get_alias("Cultura y sociedad")?>">
-            <ul class="cards">
-                <?php
-                foreach ($culturaSociedad as $cs) {
-                    if ($cs->acf->backgroundimgcs !== "") {
-                        $figureHtml = '<img loading="lazy" class="lazyload" src="https://placehold.co/230x297/037A19/FFFFFF" data-src="' . $cs->acf->backgroundimgcs . '" alt="' . $cs->title->rendered . '" />';
-                    } else {
-                        $figureHtml = '<img loading="lazy" class="lazyload" src="https://placehold.co/230x297/037A19/FFFFFF" data-src="https://files.cinescuela.org/2024/03/cultura-sociedad-temporal.jpg" alt="' . $cs->title->rendered .'" />';
+        <?php
+            function getAndShowTool($tool) {
+                // HTML de la herramienta según el tipo de herramienta
+                $toolItemHtml = "";
+                $toolHtml = "";
+                if ($tool->tipo_de_herramienta) {
+                    switch ($tool->tipo_de_herramienta) {
+                        case "17":
+                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_video" title="Video">Video</a>';
+                            break;
+                        case "18":
+                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_imagen" title="Fotografía">Imagen</a>';
+                            break;
+                        case "19":
+                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_cartilla" title="Cartilla">Cartilla</a>';
+                            break;
+                        case "110":
+                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_multi" title="Multimedia">Multimedia</a>';
+                            break;
+                        case "111":
+                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_audio" title="Audio">Audio</a>';
+                            break;
+                        case "21400":
+                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_estadistica" title="Infografía">Infografía</a>';
+                            break;
+                    }
+                    // Generar el HTML completo de la herramienta
+                    $toolItemHtml = '<li>' . $toolHtml . '</li>';
                 }
-                $containerList .= '<li><span class="i_list">' . $cs->title->rendered . '</span>' . $figureHtml . '</li>';
+                return $toolItemHtml; // Devolver el HTML en lugar de hacer echo
+            }
+
+            // Asegúrate de inicializar la variable $containerList
+            $containerList = '';
+
+            foreach ($culturaSociedad as $cs) {
+                // Verifica que las propiedades existan antes de usarlas
+                $backgroundImg = !empty($cs->acf->backgroundimgcs) ? $cs->acf->backgroundimgcs : "https://files.cinescuela.org/2024/03/cultura-sociedad-temporal.jpg";
+                $figureHtml = '<img loading="lazy" class="lazyload" src="https://placehold.co/230x297/037A19/FFFFFF" data-src="' . $backgroundImg . '" alt="' . htmlspecialchars($cs->title->rendered) . '" />';
+
+                $containerList .= '<li>';
+                $containerList .= '<span class="i_list">' . htmlspecialchars($cs->title->rendered) . '</span>' . $figureHtml;
+
+                // Solo añadir el <ul> si hay elementos en related_tools
+                if (!empty($cs->related_tools) && is_array($cs->related_tools)) {
+                    $containerList .= "<ul class='tipo'>";
+                    foreach ($cs->related_tools as $tool) {
+                        // Asegúrate de que la función getAndShowTool() existe
+                        if (function_exists('getAndShowTool')) {
+                            $containerList .= getAndShowTool($tool); // Concatenar el resultado de la función
+                        }
+                    }
+                    $containerList .= "</ul>";
                 }
-                echo $containerList;
-                ?>
-            </ul>
+
+                $containerList .= '</li>';
+            }
+
+            echo '<ul class="cards">' . $containerList . '</ul>';
+            ?>
+   <button type="button" onclick="openModalSugerencia('Recurso de cultura y sociedad')" class="btn btn-primary sugerencia">Crear sugerencia</button>
         </section>
     </div>
 </main>

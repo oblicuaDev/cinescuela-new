@@ -32,7 +32,7 @@
     margin-top: 17px;
     position: absolute;
     left: 0;
-    top: 100%;
+    top: 28px;
     display: none;
     background-color: #ffffff;
     z-index: 10;
@@ -97,13 +97,13 @@
   }
 }
 
-.dropdown-open {
-  .dropdown-menu.dropdown-active {
+.dropdown-container:hover {
+  .dropdown-menu {
     display: block;
   }
 }
 
-.dropdown-container.dropdown-open {
+.dropdown-container:hover {
   .dropdown-toggle {
     background-color: rgba($color: #037a19, $alpha: 0.3);
     color: #ffffff;
@@ -153,26 +153,21 @@
 // dropdown-gradient
 
 .dropdown-gradient {
+
   .dropdown-toggle,
   .dropdown-menu,
   a {
     background: rgb(255, 49, 49);
-    background: -moz-linear-gradient(
-      262deg,
-      rgba(255, 49, 49, 1) 11%,
-      rgba(84, 0, 255, 1) 100%
-    );
-    background: -webkit-linear-gradient(
-      262deg,
-      rgba(255, 49, 49, 1) 11%,
-      rgba(84, 0, 255, 1) 100%
-    );
-    background: linear-gradient(
-      262deg,
-      rgba(255, 49, 49, 1) 11%,
-      rgba(84, 0, 255, 1) 100%
-    );
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff3131",endColorstr="#5400ff",GradientType=1);
+    background: -moz-linear-gradient(262deg,
+        rgba(255, 49, 49, 1) 11%,
+        rgba(84, 0, 255, 1) 100%);
+    background: -webkit-linear-gradient(262deg,
+        rgba(255, 49, 49, 1) 11%,
+        rgba(84, 0, 255, 1) 100%);
+    background: linear-gradient(262deg,
+        rgba(255, 49, 49, 1) 11%,
+        rgba(84, 0, 255, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff3131", endColorstr="#5400ff", GradientType=1);
     color: #ffffff;
   }
 
@@ -192,22 +187,16 @@
       &:active,
       &:focus {
         background: rgb(255, 49, 49);
-        background: -moz-linear-gradient(
-          66deg,
-          rgba(255, 49, 49, 1) 11%,
-          rgba(84, 0, 255, 1) 100%
-        );
-        background: -webkit-linear-gradient(
-          66deg,
-          rgba(255, 49, 49, 1) 11%,
-          rgba(84, 0, 255, 1) 100%
-        );
-        background: linear-gradient(
-          66deg,
-          rgba(255, 49, 49, 1) 11%,
-          rgba(84, 0, 255, 1) 100%
-        );
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff3131",endColorstr="#5400ff",GradientType=1);
+        background: -moz-linear-gradient(66deg,
+            rgba(255, 49, 49, 1) 11%,
+            rgba(84, 0, 255, 1) 100%);
+        background: -webkit-linear-gradient(66deg,
+            rgba(255, 49, 49, 1) 11%,
+            rgba(84, 0, 255, 1) 100%);
+        background: linear-gradient(66deg,
+            rgba(255, 49, 49, 1) 11%,
+            rgba(84, 0, 255, 1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff3131", endColorstr="#5400ff", GradientType=1);
       }
     }
 
@@ -221,6 +210,7 @@
 // dropdown-solid
 
 .dropdown-solid {
+
   .dropdown-toggle,
   .dropdown-menu {
     background-color: rgba($color: #037a19, $alpha: 0.3);

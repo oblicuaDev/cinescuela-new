@@ -3,7 +3,7 @@
     $moviesIds = json_decode($jsonString, true);
     include '../includes/config.php';
     // $ids = "", $page = 1, $per_page = 50, $extra = []
-    $movies = $sdk->getPeliculas(isset($moviesIds) ? $moviesIds: "", isset($_GET['page']) ? $_GET['page'] : 1, 15);
+    $movies = $sdk->getPeliculas(isset($moviesIds) ? $moviesIds: "", isset($_GET['page']) ? $_GET['page'] : 1, 15,['order'=>'asc',"orderby"=>"acompanamiento_pedagogico_privado"]);
     if(isset($movies['response'])){
         echo json_encode($movies['response']); 
 

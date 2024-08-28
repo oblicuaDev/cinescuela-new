@@ -8,7 +8,7 @@
 <main>
     <div class="container">
         <h1><?=$novedades->title->rendered?></h1>
-        <h2><?=$novedades->acf->fecha_de_publicacion?></h2>
+        <time datetime="<?=$novedades->acf->fecha_de_publicacion?>"><?=$novedades->acf->fecha_de_publicacion?></time>
     <img src="<?=$sdk->replaceUrl($novedades->acf->imagen)?>" alt="<?=$novedades->title->rendered?>">
         <?=$novedades->content->rendered?>
     </div>

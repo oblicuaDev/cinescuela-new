@@ -1,2 +1,53 @@
 .ap.cinescuela-page {
+  header {
+    margin-bottom: 80px;
+    position: relative;
+    background: #000;
+    @media only screen and (max-width: 1023px){
+      margin-bottom: 20px;
+    }
+  }
+
+  main {
+    padding-bottom: 80px;
+
+    h2 {
+      color: #111;
+      max-width: 1200px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .corner-ribbon {
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 10;
+    }
+
+    .corner-ribbon span {
+      position: absolute;
+      display: block;
+      width: 200%;
+      padding: 8px 0;
+      background: green;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      color: white;
+      font: 700 13px/1 "Lato", sans-serif;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      text-transform: uppercase;
+      text-align: center;
+      right: -100px;
+      top: 30px;
+      transform: rotate(45deg);
+    }
+
+    .corner-ribbon span::before {
+      content: "★";
+      margin-right: 5px;
+    }
+  }
 }

@@ -1,0 +1,4 @@
+[19-Aug-2024 18:35:52 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /home/customer/www/cinescuela.org/public_html/search.php:28
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/cinescuela.org/public_html/search.php on line 28

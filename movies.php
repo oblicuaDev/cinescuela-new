@@ -23,8 +23,11 @@
             <div class="swiper-wrapper">
                 <!-- Slides -->
                 <?php for($i=0;$i<count($destacados);$i++){ $post = $destacados[$i]; ?>
-                <div class="swiper-slide"
-                    style="background-image:url(<?=$sdk->replaceUrl($post->acf->imagen_pelicula)?>);	">
+                <div class="swiper-slide">
+                    <picture>
+                        <source media="(max-width: 1023px)" srcset="<?=$sdk->replaceUrl($post->acf->afiche)?>">
+                        <img src="<?=$sdk->replaceUrl($post->acf->imagen_pelicula)?>" alt="<?=$post->title->rendered?>" id="logo">
+                    </picture>
                     <div class="container">
             <div class="overlay">
                 <img src="<?= $post->acf->logo_de_la_pelicula?>" alt="Logo Pelicula">
@@ -44,10 +47,9 @@
                             }
                         }
                 ?>
-                    <a href="<?=$lang?>/pelicula/<?=$sdk->get_alias( $post->title->rendered)?>-<?= $post->id?>"
-                        class="btn btn-primary">Reproducir película</a>
-                    <a href="javascript:;" onclick="getInfoMovie(bannerMovie)" data-fancybox=""
-                        data-src="#dialog-content" class="btn btn-secondary">Mas información</a>
+                    <!-- <a href="/pelicula/<?=$sdk->get_alias( $post->title->rendered)?>-<?= $post->id?>"
+                        class="btn btn-primary">Reproducir película</a> -->
+                    <a href="<?=$_GET['lang']?>/pelicula/<?=$sdk->get_alias($post->title->rendered)?>-<?=$post->id?>" class="btn btn-secondary">Mas información</a>
                 </div>
             </div>
         </div>
@@ -72,8 +74,10 @@
                 ?>
         <li>
             <a data-temalight="<?=$theme?>" href="<?=$_GET['lang']?>/pelicula/<?=$sdk->get_alias($post->title->rendered)?>-<?=$post->id?>">
-                <img loading="lazy" class="lazyload" src="https://picsum.photos/20/20"
-                    data-src="<?=$sdk->replaceUrl($post->acf->imagen_pelicula)?>" alt="<?=$post->title->rendered?>">
+                <picture>
+                    <source media="(max-width: 1023px)" srcset="<?=$sdk->replaceUrl($post->acf->afiche)?>">
+                    <img src="<?=$sdk->replaceUrl($post->acf->imagen_pelicula)?>" alt="<?=$post->title->rendered?>" id="logo">
+                </picture>
                 <img loading="lazy" class="lazyload movieLogo" src="https://picsum.photos/20/20"
                     data-src="<?=$sdk->replaceUrl($post->acf->logo_de_la_pelicula)?>" alt="Logo Pelicula">
             </a>

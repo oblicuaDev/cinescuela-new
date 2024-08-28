@@ -3,10 +3,8 @@
   position: absolute;
   top: calc(100% + 5px);
   right: 0;
-  background-color: #037a19;
-  border: 1px solid #ccc;
+  background-color: #111;
   border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   width: 320px;
   ul {
@@ -15,9 +13,37 @@
       width: 100%;
       display: flex;
       align-items: center;
-      padding: 8px;
-      font-size: 14px;
-      border-bottom: 1px solid #fff;
+      border-bottom: 1px solid rgba($color: #fff, $alpha: 0.5);
+      .date-container {
+        color: #fff;
+        text-align: center;
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .date {
+          font-size: 36px;
+          font-weight: bold;
+          line-height: 32px;
+        }
+        .month {
+          font-size: 18px;
+          font-weight: 500;
+        }
+      }
+      p {
+        font-size: 12px;
+        line-height: 15px;
+        flex: 1;
+        text-align: left;
+      }
+      &:hover {
+        background-color: #037a19;
+        .date-container {
+          color: #fff;
+        }
+      }
     }
   }
 }

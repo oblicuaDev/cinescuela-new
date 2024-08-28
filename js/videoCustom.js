@@ -22,10 +22,11 @@ let videoContainer;
 let videoControls = document.getElementById("video-controls");
 let volume = document.getElementById("volume");
 let volumeButton = document.getElementById("volumeButton");
-let volumeHigh = document.getElementById("volume-high");
-let volumeLow = document.getElementById("volume-low");
-let volumeMute = document.getElementById("volume-mute");
+let volumeMute = document.getElementById("volumemute");
+let volumeLow = document.getElementById("volumelow");
+let volumeHigh = document.getElementById("volumehigh");
 let playbackIcons;
+const videoEl = document.querySelector("#videoEl");
 
 function initializeVideo() {
   const videoDuration = Math.round(videoEl.duration);
@@ -34,21 +35,37 @@ function initializeVideo() {
   const time = formatTime(videoDuration);
   duration.innerText = `${time.minutes}:${time.seconds}`;
   duration.setAttribute("datetime", `${time.minutes}m ${time.seconds}s`);
+  togglePlay();
+  if(localStorage.getItem("currentTime")){
+    video.currentTime = localStorage.getItem("currentTime")
+  }
 }
 
 if (document.querySelector(".videos")) {
   // Obtener el elemento del video
-  const videoEl = document.querySelector("#videoEl");
 
-  // Función para alternar la reproducción del video
+  // Function to toggle video play and pause
   function togglePlay() {
+    const playIcon = playButton.querySelector('use[href="#play-icon"]');
+    const pauseIcon = playButton.querySelector('use[href="#pause"]');
+
+    // Toggle the play and pause icons
+    playIcon.classList.toggle("hidden");
+    pauseIcon.classList.toggle("hidden");
+    pausedClass();
+
     if (videoEl.paused) {
-      videoEl.play();
+      videoEl.play().catch((error) => {
+        // Handle the error here
+        console.error("Video play failed:", error);
+        // Revert the icon state if play fails
+        playIcon.classList.remove("hidden");
+        pauseIcon.classList.add("hidden");
+      });
     } else {
       videoEl.pause();
     }
   }
-
   function keyEvent(event) {
     const key = event.key;
     switch (key) {
@@ -84,8 +101,10 @@ if (document.querySelector(".videos")) {
   function updatePlayButton() {
     if (videoEl) {
       if (videoEl.paused) {
+        document.querySelector(".overlayMovie").classList.remove("hidden");
         playButton.setAttribute("data-title", "Play (k)");
       } else {
+        document.querySelector(".overlayMovie").classList.add("hidden");
         playButton.setAttribute("data-title", "Pause (k)");
       }
     }
@@ -109,6 +128,8 @@ if (document.querySelector(".videos")) {
       videoEnd = true;
     }
     getBufferTime();
+      localStorage.setItem("currentTime",videoEl.currentTime);
+    
   }
 
   function updateSeekTooltip(event) {
@@ -141,6 +162,7 @@ if (document.querySelector(".videos")) {
   }
 
   function updateVolumeIcon() {
+    let volumeIcons = document.querySelectorAll(".volume-controls use");
     volumeIcons.forEach((icon) => {
       icon.classList.add("hidden");
     });
@@ -166,6 +188,16 @@ if (document.querySelector(".videos")) {
   }
 
   function toggleFullScreen() {
+    const fullscreenIcon = fullscreenButton.querySelector(
+      'use[href="#fullscreen"]'
+    );
+    const fullscreenExitIcon = fullscreenButton.querySelector(
+      'use[href="#fullscreen-exit"]'
+    );
+
+    // Toggle the fullscreen and fullscreen exit icons
+    fullscreenIcon.classList.toggle("hidden");
+    fullscreenExitIcon.classList.toggle("hidden");
     if (document.fullscreenElement) {
       document.exitFullscreen();
     } else {
@@ -189,11 +221,30 @@ if (document.querySelector(".videos")) {
       return;
     }
     videoControls.classList.add("hidden");
+    document.querySelector("a.backArrow").classList.add("hidden");
+    document.querySelector(".overlayMovie").classList.add("hidden");
   }
+
+  let hideControlsTimeout;
 
   function showControls() {
     videoControls.classList.remove("hidden");
+    document.querySelector("a.backArrow").classList.remove("hidden");
+
+    // Limpiar cualquier timeout previo antes de establecer uno nuevo
+    clearTimeout(hideControlsTimeout);
+
+    // Establecer un nuevo timeout para ocultar los controles
+    hideControlsTimeout = setTimeout(() => {
+      hideControls();
+    }, 8000);
   }
+
+  // Escuchar el movimiento del mouse para resetear el temporizador
+  document.addEventListener("mousemove", () => {
+    // Mostrar los controles de nuevo
+    showControls();
+  });
 
   function createObjectURL(object) {
     return window.URL
@@ -271,4 +322,31 @@ const toggleMode = () => {
       .querySelector("body")
       .classList.contains("teaching-mode");
   });
+  pausedClass();
 };
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("activeTeaching") === "1") {
+    // Realiza la acción deseada
+    console.log("El parámetro activeTeaching está activo.");
+    // Aquí puedes colocar el código que quieras ejecutar
+    toggleMode();
+  }
+});
+
+function pausedClass() {
+  if (document.querySelector(".teaching-mode .video-container")) {
+    if (videoEl) {
+      if (videoEl.paused) {
+        document
+          .querySelector(".teaching-mode .video-container")
+          .classList.remove("paused");
+      } else {
+        document
+          .querySelector(".teaching-mode .video-container")
+          .classList.add("paused");
+      }
+    }
+  }
+}

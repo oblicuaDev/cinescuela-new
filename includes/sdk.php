@@ -3,6 +3,7 @@ class Cinescuela {
     public $domain = "https://webadmin.cinescuela.org/wp-json/wp/v2/";
     public $domainCustom = "https://webadmin.cinescuela.org/wp-json/custom/v1/";
     public $generalInfo = array();
+    public $tourSteps = array();
     public $language = "es";
     public $production = true;
 
@@ -12,10 +13,11 @@ class Cinescuela {
         }
         $this->language = $language;
         $this->generalInfo = $this->gHomeInfo();
+        $this->tourSteps = $this->getTourSteps();
     }
     public function customQuery($endpoint, $body = "", $method = "GET", $page = 1, $per_page = 50, $extra = [], $cache = true){
         // Ruta donde se va a guardar todos los archivos de CACHE
-        $cacheAbsoluteRoute = "/home/tiendasantuario/public_html/host/oblicua.co/lab/cinescuela-new/cache";
+        $cacheAbsoluteRoute = "/home/customer/www/cinescuela.org/public_html/cache";
         $url = "{$this->domainCustom}{$endpoint}";
         $url = urldecode($url);
          // Realizar la solicitud HEAD para obtener solo los encabezados de respuesta
@@ -76,7 +78,7 @@ class Cinescuela {
             $query['per_page'] = $per_page;
         }
         // Ruta donde se va a guardar todos los archivos de CACHE
-        $cacheAbsoluteRoute = "/home/tiendasantuario/public_html/host/oblicua.co/lab/cinescuela-new/cache";
+        $cacheAbsoluteRoute = "/home/customer/www/cinescuela.org/public_html/cache";
         // Validación de la variable $extra para colocar queryParams en el ENDPOINT
         if ($extra) {
             $query = array_merge($query, $extra);
@@ -84,6 +86,7 @@ class Cinescuela {
         $query_string = http_build_query($query);
         $url = "{$this->domain}{$endpoint}?{$query_string}";
         $url = urldecode($url);
+
          // Realizar la solicitud HEAD para obtener solo los encabezados de respuesta
          $response_headers = get_headers($url, 1);
          // Verificar si la solicitud fue exitosa
@@ -103,11 +106,17 @@ class Cinescuela {
         // Set request body for POST and PUT methods
         if ($method === "POST" || $method === "PUT") {
             curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Authorization: Basic cXRiZGUyOjVudzUgRlltdyBjRkNFIGZ6bFogWlJQUiBjMWUy'
+            ));
+        }else{
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json'
+            ));
+
         }
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json'
-        ));
         if ($cache) {
             $filetitle = $this->get_alias($url) . ".json";
             if (!file_exists($cacheAbsoluteRoute)) {
@@ -148,14 +157,12 @@ class Cinescuela {
                 return $resultados["response"];
                
             } else {
-                // Si es un arreglo (múltiples IDs), hacer una consulta por cada uno
-                foreach ($ids as $id) {
-                    // Perform your query
-                    $resultados = $this->query($recurso."/".strval($id), $body, $method, $page, $per_page, $extra, $cache);
-                    // Add the result to the array
-                    $results[] = $resultados;
-                }
-                return $results;
+                $ids = implode(",", $ids);
+                $extra['include'] = $ids;
+
+                // Perform your query
+                $resultados = $this->query($recurso, $body, $method, $page, $per_page, $extra, $cache);
+                return $resultados;
             }
         } else {
             // Si no se proporcionan IDs, hacer una consulta general sin IDs y almacenar el resultado
@@ -181,6 +188,10 @@ class Cinescuela {
         }
         return $gnrl[$this->language] ;
     }
+    function getTourSteps() {
+        $info = $this->consultarRecursos("cinescuela-tour");
+        return $info;
+    }
     function getTheme($id){
         $response = $this->customQuery("cinescuela-ap/$id");
         return $response;
@@ -188,6 +199,10 @@ class Cinescuela {
     function getPages($ids = "", $page = 1, $per_page = 50, $extra = []) {
         $info = $this->consultarRecursos("pages", $ids, "", "GET", $page, $per_page,  $extra, true);
         return $info;
+    }
+    function getCollections($ids = "", $page = 1, $per_page = 50, $extra = []) {
+        $peliculas = $this->consultarRecursos("cinescuela-coll", $ids, "", "GET", $page, $per_page,  $extra, true);
+        return $peliculas;
     }
     function getPeliculas($ids = "", $page = 1, $per_page = 50, $extra = []) {
         $peliculas = $this->consultarRecursos("cinescuela-movies", $ids, "", "GET", $page, $per_page,  $extra, true);
@@ -246,7 +261,8 @@ class Cinescuela {
         return $user['response'];
     }
     function getInfoUser($id){
-        $user = $this->consultarRecursos("cinescuela-users", $id);
+        // $recurso, $ids = "", $body = "", $method = "GET", $page = 1, $per_page = 50, $extra = [], $cache = true
+        $user = $this->consultarRecursos("cinescuela-users", $id, "", "GET", "1", "1", [], false);
         return $user;
     }
     function getProfileUsers($id){
@@ -270,7 +286,7 @@ class Cinescuela {
         return $tools;
     }
     function getTotems($idMovie){
-        $totems = $this->consultarRecursos("cinescuela-totem", "", "","GET", 1, 99,['field'=>'pelicula','value'=>$idMovie]);
+        $totems = $this->consultarRecursos("cinescuela-totem", "", "","GET", 1, 99,['field'=>'pelicula','value'=>$idMovie], false);
         return $totems;
     }
     function read_json($array){
@@ -281,9 +297,16 @@ class Cinescuela {
 	function find_array($array, $row, $lang){
 		echo $array[$row][$lang];
 	}
+    function setLead($data){
+        $result = $this->query("cinescuela-leads", $data, "POST", 1, 50, [], false);
+        return $result;
+    }
     function get_alias($String){
         $String = html_entity_decode($String); // Traduce codificación
 
+        $String = str_replace("–", "", $String);
+        $String = str_replace("—", "", $String);
+        $String = str_replace("-", "", $String);
         $String = str_replace("%2c", "_", $String); //Signo de exclamación abierta.&iexcl;
         $String = str_replace("¡", "", $String); //Signo de exclamación abierta.&iexcl;
         $String = str_replace("'", "", $String); //Signo de exclamación abierta.&iexcl;
@@ -418,9 +441,6 @@ class Cinescuela {
         $String = str_replace("“", "", $String);
         $String = str_replace("”", "", $String);
         $String = str_replace("+", "", $String);
-        // $String = str_replace("–", "", $String);
-        // $String = str_replace("—", "", $String);
-        // $String = str_replace("-", "", $String);
 
         //Mayusculas
         $String = strtolower($String);
@@ -451,9 +471,8 @@ class Cinescuela {
 		return $ip_address;
 	}
 	function verifyIp($theip){
-		global $cinescuela;
-		$ip = getRealIP(); // Obtener la IP real del usuario
-		$users = $cinescuela->query("cinescuela-users", "", "GET", 1, 100, ['field' => 'ips', 'value' => $ip], false);
+		$ip = $this->getRealIP(); // Obtener la IP real del usuario
+		$users = $this->query("cinescuela-users", "", "GET", 1, 100, ['field' => 'ips', 'value' => $theip], false);
 		if (is_array($users) && count($users) > 0) {
 			return $users['response'][0]; // Se encontró al menos un usuario con la IP dada
 		} else {
@@ -461,7 +480,7 @@ class Cinescuela {
 		}
 	}
 	function setIp($userRowID){
-		$ip = getRealIP();
+		$ip = $this->getRealIP();
 		$ch = curl_init('http://orekacloud.com/p/custom_functions/217/set_ip.php');
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST'); 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -471,5 +490,90 @@ class Cinescuela {
 		curl_close($ch);
 		return $ch_response;
 	}
+    function create_metas($seoId='8695', $type='pages')
+    {
+        $host = $_SERVER['HTTP_HOST'];
+        $request_uri = $_SERVER['REQUEST_URI'];
+        global $metas, $urlMap, $seo;
+        $canonicalURL = "http://$host$request_uri";
+        if ($seoId == '') {
+            $seoId = 4;
+        }
+        
+        $ret = '';
+        $seo = $this->query("$type/$seoId");
+        $seo = $seo['response'];
+        $metas['words'] = $seo->acf->titulo_de_la_ventana;
+        $metas['title'] = $seo->acf->titulo_de_la_ventana;
+        $metas['desc'] = $seo->acf->meta_descripcion;
+        $metas['words'] = $seo->acf->palabras_clave_de_esta_publicacion;
+        if($seo->acf->imagen_para_el_open_graph){
+            $metas['img'] = $this->replaceUrl($seo->acf->imagen_para_el_open_graph);
+
+        }else{
+            $metas['img'] = $this->replaceUrl($seo->acf->afiche);
+
+        }
+        // list($width, $height, $type, $attr) = getimagesize("https://www.bogotadc.travel" . $seo->field_seo_img);
+        $ret = '<meta charset="utf-8">' . PHP_EOL;
+        $ret .= '<link rel="canonical" href="' . $canonicalURL . '">' . PHP_EOL; 
+        $ret .= '<meta name="keywords" content="' . $metas['words'] . '">' . PHP_EOL;
+        $ret .= '<meta name="description" content="' . $metas['desc'] . '">' . PHP_EOL;
+        $ret .= '<meta name="viewport" content="width=device-width, initial-scale=1">' . PHP_EOL;
+        $ret .= '<title>' . $metas['title'] . ' - Cinescuela</title>' . PHP_EOL;
+        $ret .= '<meta name="thumbnail" content="' . $metas['img'] . '">' . PHP_EOL;
+        $ret .= '<meta name="language" content="spanish">' . PHP_EOL;
+        $ret .= '<meta name="twitter:card" content="summary_large_image">' . PHP_EOL;
+        $ret .= '<meta name="twitter:site" content="@cinescuela_org">' . PHP_EOL;
+        $ret .= '<meta name="twitter:title" content="' . $metas['title'] . '">' . PHP_EOL;
+        $ret .= '<meta name="twitter:description" content="' . $metas['desc'] . '">' . PHP_EOL;
+        $ret .= '<meta name="twitter:image" content="' . $metas['img'] . '">' . PHP_EOL;
+        //$ret .= '<meta property="fb:app_id" content="865245646889167">'.PHP_EOL;
+
+        $ret .= '<meta property="og:type" content="website">' . PHP_EOL;
+        $ret .= '<meta property="og:title" content="' . $metas['title'] . '">' . PHP_EOL;
+        $ret .= '<meta property="og:site_name" content="' . $metas['title'] . '">' . PHP_EOL;
+        $ret .= '<meta property="og:description" content="' . $metas['desc'] . '">' . PHP_EOL;
+        $ret .= '<meta property="og:image" content="' . $metas['img'] . '">' . PHP_EOL;
+        // $ret .= '<meta property="og:image:width" content="' . $width . '">' . PHP_EOL;
+        // $ret .= '<meta property="og:image:height" content="' . $height . '">' . PHP_EOL;
+        $ret .= '<meta property="og:image:alt" content="' . $metas['title'] . '"/>' . PHP_EOL;
+        $ret .= PHP_EOL;
+        $ret .= "<!--[if IE]>\n";
+        $ret .= "<script>\n";
+        $ret .= "\n\tdocument.createElement('header');\n\tdocument.createElement('footer');";
+        $ret .= "\n\tdocument.createElement('section');\n\tdocument.createElement('figure');\n\tdocument.createElement('aside');";
+        $ret .= "\n\tdocument.createElement('nav');\n\tdocument.createElement('article');";
+        $ret .= "\n</script>\n";
+        $ret .= "\n<![endif]-->\n";
+        return $ret;
+    }
+    function campaignMonitorEmail($email,$subject="", $template, $mergeTags){
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.createsend.com/api/v3.2/transactional/smartemail/'.$template.'/send',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS =>'{
+            "To": ["'.$email.'"],
+            "Data":'.$mergeTags.',
+            "ConsentToTrack": "yes"
+        }',
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'Authorization: Basic ZUg3czhIdEJXQlhYQlVtS2Q4U2tvc3hLZVZLL3RuVFMyQi9tcDUvWHp0M1dXZDJ0dVJYclVsOGxENnlOa1Zld2t4dnI2RHFLWmtPcS9TbEJJYUlkd1JQejBLU245cTcrcDFyMnVSUStFWXRRZE9Tak85VjdTVmhKYnV2TCtKeVMrMnFrTFR6RlFhRE9zbG9GdjlLcTFnPT06'
+        ),
+        ));
+        $response = curl_exec($curl);
+    
+        curl_close($curl);
+        return $response;
+    }
+// $emailSended3 = campaignMonitorEmail("","", "01a8972d-c482-45c7-b1df-0102df04082e", "{\"PBSERIAL\":\"$ID\"}");
 }
 ?>

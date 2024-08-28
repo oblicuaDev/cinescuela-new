@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nueva Sugerencia en el Buzón</title>
+    <style type="text/css">
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header {
+        background-color: #037a19;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .header img {
+        max-width: 100px;
+        height: auto;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .content h1 {
+        color: #333333;
+      }
+
+      .content p {
+        color: #666666;
+      }
+
+      .footer {
+        padding: 20px;
+        text-align: center;
+        font-size: 12px;
+        color: #666666;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <img
+          src="images/logo.png"
+          alt="Logo"
+        />
+      </div>
+      <div class="content">
+        <h1>Nueva Sugerencia en el Buzón</h1>
+        <p>
+          Hemos recibido una nueva sugerencia en el buzón. Aquí están los
+          detalles:
+        </p>
+        <p><strong>Email del Usuario:</strong>{{mail}}</p>
+        <p><strong>Sugerencia:</strong> {{content}}</p>
+      </div>
+      <div class="footer">
+        <p>Gracias por estar atento a las sugerencias de nuestros usuarios.</p>
+      </div>
+    </div>
+  </body>
+</html>

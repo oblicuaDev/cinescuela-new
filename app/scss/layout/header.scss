@@ -1,4 +1,25 @@
 .cinescuela-app {
+  .thanks {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 99999;
+    background: #161616;
+    transform: translate(-50%, -50%);
+    max-width: 600px;
+    color: #fff;
+    padding: 50px;
+    border-radius: 8px;
+    h2,
+    p {
+      color: #fff;
+    }
+  }
   header {
     align-items: center;
     color: #fff;
@@ -15,6 +36,10 @@
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 1) 29%
     );
+    @media only screen and (max-width: 1023px){
+        padding: 0 20px;
+        flex-direction: column-reverse;
+    }
     .top-bar {
       justify-content: flex-end;
       gap: 50px;
@@ -30,7 +55,7 @@
         justify-content: center;
         gap: 30px;
         display: flex;
-        height: 80px;
+        height: 45px;
         align-items: center;
       }
       a {
@@ -38,6 +63,10 @@
         align-items: center;
         gap: 10px;
         color: #fff;
+        &.active,
+        &:hover {
+          color: #037a19;
+        }
         span {
           @media only screen and (max-width: 1023px) {
             display: none;
@@ -55,6 +84,7 @@
         svg {
           width: 22px;
         }
+
         .notifications-count {
           position: absolute;
           width: 15px;
@@ -81,23 +111,34 @@
           align-items: center;
           position: relative;
           ul {
+            display: none;
             position: absolute;
             top: 100%;
-            z-index: 2;
             right: 0;
-            display: none;
-            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            background-color: #111;
+            border-radius: 4px;
+            z-index: 1000;
+            width: 175px;
+            padding: 11px;
           }
           &:hover {
             ul {
               display: block;
-              background: #fff;
-              width: max-content;
               li {
-                padding: 5px;
-                a {
-                  color: #000;
-                  font-size: 14px;
+                a,
+                button {
+                  padding: 10px 0;
+                  width: 100%;
+                  font-family: var(--font-primary);
+                  font-size: 15px;
+                  line-height: 15px;
+                  color: #fff;
+                  flex: 1;
+                  display: block;
+                  text-align: left;
+                  &:hover {
+                    opacity: 0.5;
+                  }
                 }
               }
             }
@@ -120,12 +161,19 @@
         display: flex;
         align-items: center;
         width: 100%;
+        @media only screen and (max-width: 1023px){
+          display: flex;
+          align-items: center;
+          width: 100%;
+          justify-content: center;
+          padding: 20px 0 0;
+        }
         a.logo {
           display: block;
           margin-right: 40px;
-          @media only screen and (max-width: 1023px) {
-            display: none;
-          }
+    @media only screen and (max-width: 1023px){
+        margin: 0;
+    }
           img {
             height: 26px;
             object-fit: contain;
@@ -144,6 +192,7 @@
             width: 100%;
             display: grid;
             gap: 0;
+            z-index: 2;
             grid-template-columns: repeat(4, 1fr);
           }
           a {
@@ -151,6 +200,11 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            &.active,
+            &:hover {
+              color: #037a19;
+              font-weight: 500;
+            }
             @media only screen and (max-width: 1023px) {
               align-items: center;
               justify-content: center;
@@ -182,7 +236,6 @@
         display: flex;
         gap: 10px;
         align-items: center;
-        width: 100%;
         justify-content: flex-end;
       }
     }
@@ -193,10 +246,11 @@
       position: relative;
       z-index: 10;
       background: #000;
-      .dropdown-container,
-      .search-comp {
+      .dropdown-container
+       {
         display: none;
       }
+      
       #openSearchMobile {
         display: block;
       }

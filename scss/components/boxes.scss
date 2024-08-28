@@ -1,12 +1,14 @@
 .fancybox__container:not(.is-compact) .fancybox__slide.has-close-btn {
   padding: 0;
 }
-.fancybox__content > .f-button.is-close-btn {
+
+.fancybox__content>.f-button.is-close-btn {
   top: 26px;
   right: 26px;
   opacity: 1;
   mix-blend-mode: difference;
 }
+
 #dialog-content {
   .content {
     border-radius: 20px;
@@ -15,24 +17,29 @@
     max-width: 1080px;
     width: 100%;
     margin: 0 auto;
+
     @media only screen and (max-width: 1023px) {
       border-radius: 0;
     }
+
     &-header {
       height: 480px;
       position: relative;
+
       .image {
         height: 100%;
         overflow: hidden;
         background-color: rgba($color: #000000, $alpha: 0.6);
         width: 100%;
         position: relative;
+
         img {
           object-fit: cover;
           width: 100%;
           height: 100%;
           object-position: top;
         }
+
         h2 {
           bottom: 60px;
           color: #fff;
@@ -42,6 +49,7 @@
           z-index: 12;
         }
       }
+
       #logoPeli {
         bottom: 35px;
         left: 115px;
@@ -50,17 +58,25 @@
         filter: drop-shadow(0 0 0.75rem #000);
         height: 120px;
         z-index: 2;
+        @media only screen and (max-width: 1023px){
+            left: 50%;
+            width: 80%;
+            transform: translateX(-50%);
+        }
       }
     }
+
     &-body {
       padding: 20px 50px;
       gap: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
+
       @media only screen and (max-width: 1023px) {
         padding: 20px;
       }
+
       p {
         font-size: 14px;
         color: #fff;
@@ -71,36 +87,112 @@
         grid-template-columns: 613px auto;
         gap: 40px 70px;
         width: 100%;
+
         @media only screen and (max-width: 1023px) {
           grid-template-columns: 1fr;
           gap: 20px;
         }
+
         .actions {
           grid-column: span 2;
           display: flex;
           align-items: center;
           gap: 14px;
           position: relative;
+
           @media only screen and (max-width: 1023px) {
             grid-column: span 1;
             flex-direction: column;
           }
+
           a {
             max-width: 300px;
             width: 100%;
+
             @media only screen and (max-width: 1023px) {
               max-width: 100%;
             }
           }
+
           .age {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             right: 0;
-            font-size: 31px;
+            font-size: 20px;
             color: #fff;
             display: flex;
             align-items: center;
+
+            &::after {
+              width: 60px;
+              height: 60px;
+              content: '';
+              position: absolute;
+              top: 50%;
+    left: 50%;
+              transform: translate(-50%, -50%);
+              z-index: -1;
+              -webkit-mask-size: 100%;
+              mask-size: 100%;
+            }
+
+            &.triangulo {
+              &::after {
+                -webkit-mask: url(../images/formas/triangle.svg) no-repeat center;
+                mask: url(../images/formas/triangle.svg) no-repeat center;
+
+              }
+            }
+
+            &.circulo {
+              &::after {
+
+                -webkit-mask: url(../images/formas/circ.svg) no-repeat center;
+                mask: url(../images/formas/circ.svg) no-repeat center;
+
+              }
+            }
+
+            &.cuadrado {
+              &::after {
+                -webkit-mask: url(../images/formas/square.svg) no-repeat center;
+                mask: url(../images/formas/square.svg) no-repeat center;
+              }
+            }
+
+            &.hexagono {
+              &::after {
+                -webkit-mask: url(../images/formas/hex.svg) no-repeat center;
+                mask: url(../images/formas/hex.svg) no-repeat center;
+
+              }
+            }
+
+            &.rombo {
+              &::after {
+                -webkit-mask: url(../images/formas/circ.svg) no-repeat center;
+                mask: url(../images/formas/circ.svg) no-repeat center;
+
+              }
+            }
+
+            &.estrella {
+              &::after {
+                -webkit-mask: url(../images/formas/star.svg) no-repeat center;
+                mask: url(../images/formas/star.svg) no-repeat center;
+
+              }
+            }
+
+            &.triangulo_invertido {
+              &::after {
+                -webkit-mask: url(../images/formas/inv_triangle.svg) no-repeat center;
+                mask: url(../images/formas/inv_triangle.svg) no-repeat center;
+
+              }
+            }
+
             @media only screen and (max-width: 1023px) {
               position: static;
               transform: none;

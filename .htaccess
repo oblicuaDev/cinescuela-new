@@ -1,21 +1,41 @@
-RewriteOptions inherit
-RewriteEngine On
+RewriteEngine on
+#RewriteCond %{HTTPS} off
+#RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,QSA]
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L,QSA]
 
-RewriteBase /lab/cinescuela-new/
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Credentials true
+RewriteBase /
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+RewriteRule ^([esfr]+)/$ index.php?lang=$1&var=val [L,QSA]
+RewriteRule ^([esfr]+)$ index.php?lang=$1&var=val [L,QSA]
+
+RewriteRule ^$ es/ [L,QSA]
+RewriteRule ^/$ es/ [L,QSA]
+#RewriteRule ^/index.php$ es/ [L,QSA]
+
+RewriteBase /
 
 RewriteRule ^([a-zA-Z0-9_-]+)/s/([^/]*)/$ set/$2.php?lang=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/g/([^/]*)/$ get/$2.php?lang=$1 [L,QSA]
 
 RewriteRule ^$ index.php?lang=es [L,QSA]
+RewriteRule ^verify$ verify_ip.php [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?lang=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/peliculas$ movies.php?lang=$1 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/pelicula/([A-Za-z0-9-]+)-([0-9]+)$ movie.php?lang=$1&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/pelicula/([A-Za-z0-9-]+)-([0-9]+)$ movie.php?lang=$1&id=$3&seo=$3&type=cinescuela-movies [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/acompanamientos-pedagogicos$ ap.php?lang=$1 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/acompanamiento-pedagogico/([A-Za-z0-9-]+)-([0-9]+)$ movie.php?lang=$1&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/acompanamiento-pedagogico/([A-Za-z0-9-]+)-([0-9]+)$ movie.php?lang=$1&id=$3&seo=$3&type=cinescuela-movies [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/ciclos$ ciclos.php?lang=$1 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/ciclos/([A-Za-z0-9-]+)-([0-9]+)$ ciclo.php?lang=$1&id=$3 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/informacion/([A-Za-z0-9-]+)-([0-9]+)$ novedades.php?lang=$1&id=$3 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/obtener-cinescuela$ obtener-cinescuela.php?lang=$1&id=$3 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/contacto$ contact.php?lang=$1&id=$3 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/terminos-condiciones$ terminos.php?lang=$1&id=$3 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/actualidad-educacion$ novedadesList.php?lang=$1&id=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ciclos/([A-Za-z0-9-]+)-([0-9]+)$ ciclo.php?lang=$1&id=$3&seo=$3&type=cinescuela-ciclo [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/informacion/([A-Za-z0-9-]+)-([0-9]+)$ novedades.php?lang=$1&id=$3&seo=$3&type=posts [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/obtener-cinescuela$ obtener-cinescuela.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/contacto$ contact.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/terminos-condiciones$ terminos.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/actualidad-educacion$ novedadesList.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/buscar$ search.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/buscar/clasificacion/([^/]*)/([a-zA-Z0-9_-]+)$ search.php?lang=$1&age=$3  [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/buscar/asignatura/([^/]*)/([a-zA-Z0-9_-]+)$ search.php?lang=$1&subject=$3 [L,QSA]

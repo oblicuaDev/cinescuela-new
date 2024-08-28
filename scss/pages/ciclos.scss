@@ -1,7 +1,7 @@
 .cinescuela-page {
   &.ciclos {
     header {
-      position: static;
+      position: relative;
       background-color: #000000;
       margin-bottom: 80px;
       @media only screen and (max-width: 1023px) {
@@ -39,7 +39,7 @@
   &.ciclo {
     header {
       background-color: #000000;
-      position: static;
+      position: relative;
       margin-bottom: 80px;
       @media only screen and (max-width: 1023px) {
         position: relative;
@@ -49,6 +49,11 @@
     }
     main {
       color: #111;
+      .swiper{
+        img{
+          width: 100%;
+        }
+      }
     }
     .movies {
       display: grid;

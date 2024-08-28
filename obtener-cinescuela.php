@@ -2,85 +2,56 @@
     $bodyClass = "obtener";
     include 'includes/head.php';
     include 'includes/header.php';
+    $obten = $sdk->query("pages/23295");
+    $obten = $obten['response'];
 ?>
 <main>
     <div class="banner" style="background-image:url(images/bannerobtener.jpg);">
         <div class="text">
-            <h1>OBTÉN CINESCUELA EN TU INSTITUCIÓN EDUCATIVA Y ACCEDE AL MÁS COMPLETO CATÁLOGO DE CINE EDUCATIVO DEL
-                MUNDO</h1>
-            <a href="" class="btn btn-primary">Saber más</a>
+            <h1><?=$obten->acf->titulo_banner?></h1>
+            <a href="#content" class="btn btn-primary">Saber más</a>
         </div>
     </div>
+
     <section class="intro">
-        <p>Cinescuela busca fomentar la generalización de la cultura y la educación sobre la imagen, el cine y el
-            audiovisual, promover el acceso a las obras mayores del patrimonio cinematográfico mundial, estimular la
-            reflexión sobre la realidad cotidiana y la creación artística cinematográfica a través del cine. </p>
+    <?=$obten->content->rendered?>
     </section>
-    <section class="zigzag container">
-        <article data-aos="fade-right"><img src="images/art_1.jpg" alt="">
-            <div class="txt">
-                <h2>Herramientas y notas para profesores </h2>
-                <p>Cinescuela busca fomentar la generalización de la cultura y la educación sobre la imagen, el cine y
-                    el audiovisual, promover el acceso a las obras mayores del patrimonio cinematográfico mundial,
-                    estimular la reflexión sobre la realidad cotidiana y la creación artística cinematográfica a través
-                    del cine.  Cinescuela busca fomentar la generalización de la cultura y la educación sobre la imagen,
-                    el cine y el audiovisual, promover el acceso a las obras mayores del patrimonio cinematográfico
-                    mundial, estimular la reflexión sobre la realidad cotidiana y la creación artística cinematográfica
-                    a través del cine. </p><a href="" class="btn btn-primary">Saber más</a>
-            </div>
-        </article>
-        <article data-aos="fade-left"><img src="images/art_2.jpg" alt="">
-            <div class="txt">
-                <h2>Ciclos y peliculas completas todos los meses</h2>
-                <p>Cinescuela busca fomentar la generalización de la cultura y la educación sobre la imagen, el cine y
-                    el audiovisual, promover el acceso a las obras mayores del patrimonio cinematográfico mundial,
-                    estimular la reflexión sobre la realidad cotidiana y la creación artística cinematográfica a través
-                    del cine.  Cinescuela busca fomentar la generalización de la cultura y la educación sobre la imagen,
-                    el cine y el audiovisual, promover el acceso a las obras mayores del patrimonio cinematográfico
-                    mundial, estimular la reflexión sobre la realidad cotidiana y la creación artística cinematográfica
-                    a través del cine. </p><a href="" class="btn btn-primary">Saber más</a>
-            </div>
-        </article>
-        <article data-aos="fade-right"><img src="images/art_3.png" alt="">
-            <div class="txt">
-                <h2>Modo Cinefilo y Modo Pedagógico</h2>
-                <p>Cinescuela busca fomentar la generalización de la cultura y la educación sobre la imagen, el cine y
-                    el audiovisual, promover el acceso a las obras mayores del patrimonio cinematográfico mundial,
-                    estimular la reflexión sobre la realidad cotidiana y la creación artística cinematográfica a través
-                    del cine.  Cinescuela busca fomentar la generalización de la cultura y la educación sobre la imagen,
-                    el cine y el audiovisual, promover el acceso a las obras mayores del patrimonio cinematográfico
-                    mundial, estimular la reflexión sobre la realidad cotidiana y la creación artística cinematográfica
-                    a través del cine. </p><a href="" class="btn btn-primary">Saber más</a>
-            </div>
-        </article>
-        <article data-aos="fade-left"><img src="images/art_4.jpg" alt="">
-            <div class="txt">
-                <h2>Ciclos y peliculas completas todos los meses</h2>
-                <p>Cinescuela busca fomentar la generalización de la cultura y la educación sobre la imagen, el cine y
-                    el audiovisual, promover el acceso a las obras mayores del patrimonio cinematográfico mundial,
-                    estimular la reflexión sobre la realidad cotidiana y la creación artística cinematográfica a través
-                    del cine.  Cinescuela busca fomentar la generalización de la cultura y la educación sobre la imagen,
-                    el cine y el audiovisual, promover el acceso a las obras mayores del patrimonio cinematográfico
-                    mundial, estimular la reflexión sobre la realidad cotidiana y la creación artística cinematográfica
-                    a través del cine. </p><a href="" class="btn btn-primary">Saber más</a>
-            </div>
-        </article>
+    <section class="zigzag container" id="content">
+    <?php
+        $secciones = [
+            'seccion_1' => 'fade-right',
+            'seccion_2' => 'fade-left',
+            'seccion_3' => 'fade-right',
+            'seccion_4' => 'fade-left'
+        ];
+
+        foreach ($secciones as $seccion => $animacion) {
+            $titulo = $obten->acf->$seccion->titulo;
+            $imagen = $obten->acf->$seccion->imagen;
+            $desc = $obten->acf->$seccion->desc;
+            echo "<article data-aos=\"$animacion\">
+                    <img src=\"$imagen\" alt=\"$titulo\">
+                    <div class=\"txt\">
+                        <h2>$titulo</h2>
+                        $desc
+                    </div>
+                </article>";
+        }
+    ?>
+
     </section>
     <section class="banner_bottom container">
         <ul>
-            <li><strong><?=$sdk->generalInfo->acf->numero_de_ciudades_banner?></strong><?=$sdk->generalInfo->acf->palabra_1_banner?>
+            <li><strong><?=$sdk->generalInfo->acf->numero_peliculas?></strong><?=$sdk->generalInfo->acf->palabra_1_banner?>
             </li>
-            <li><strong><?=$sdk->generalInfo->acf->numero_de_escuelas_banner?></strong><?=$sdk->generalInfo->acf->palabra_2_banner?>
+            <li><strong><?=$sdk->generalInfo->acf->numero_recursos_pedagogicos?></strong><?=$sdk->generalInfo->acf->palabra_2_banner?>
             </li>
         </ul>
-        <a href="" class="btn btn-primary">¿CÓMO OBTENER CINESCUELA EN TU INSTITUCIÓN EDUCATIVA?</a>
     </section>
     <section class="planes container">
         <div class="info">
-            <h3>¿No tienes claro qué plan es para ti?</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. </p>
-            <a href="" class="btn btn-secondary">Buscar mi plan</a>
+            <h3><?= $obten->acf->titulo_planes?></h3>
+            <?= $obten->acf->descripcion_planes?>
         </div>
         <ul>
             <?php 

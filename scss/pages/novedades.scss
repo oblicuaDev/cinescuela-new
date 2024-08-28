@@ -1,7 +1,7 @@
 .cinescuela-page {
   &.novedadesPage {
     header {
-      position: static;
+      position: relative;
       background-color: #000000;
       margin-bottom: 80px;
       @media only screen and (max-width: 1023px) {
@@ -13,7 +13,7 @@
   &.novedades {
     header {
       background-color: #000000;
-      position: static;
+      position: relative;
       margin-bottom: 80px;
       @media only screen and (max-width: 1023px) {
         position: relative;
@@ -27,6 +27,15 @@
       max-width: 768px;
       margin: 0 auto;
       text-align: justify;
+      h1 {
+        font-size: 32px;
+        line-height: 40px;
+      }
+      time {
+        margin-bottom: 15px;
+        display: block;
+        font-size: 16px;
+      }
       p {
         font-size: 14px;
         line-height: 22px;

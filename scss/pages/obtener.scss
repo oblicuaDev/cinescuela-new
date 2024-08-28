@@ -1,4 +1,7 @@
 .cinescuela-page {
+  header {
+    margin-bottom: 0;
+  }
   &.obtener {
     .banner {
       height: 90vh;
@@ -8,13 +11,39 @@
       display: flex;
       align-items: flex-end;
       justify-content: center;
+      position: relative;
       padding: 80px;
+      &::after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        content: "";
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.6) 80%
+        );
+        width: 100%;
+        height: 100%;
+      }
+      @media only screen and (max-width: 1024px) {
+        height: 100vw;
+        min-height: 680px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 20px;
+      }
       .text {
+        position: relative;
+        z-index: 2;
         width: 768px;
         margin: 0 auto;
         h1 {
-          font-size: 30px;
-          line-height: 35px;
+          font-size: clamp(18px, 3vw, 30px);
+          line-height: clamp(22px, 3vw, 33px);
           margin-bottom: 30px;
           text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.86);
           text-align: center;
@@ -43,6 +72,9 @@
         justify-content: center;
         gap: 50px;
         margin-bottom: 30px;
+        @media only screen and (max-width: 1024px) {
+          flex-direction: column;
+        }
 
         .txt {
           color: #111;
@@ -68,9 +100,16 @@
           height: 493px;
           width: 600px;
           object-fit: cover;
+          @media only screen and (max-width: 1024px) {
+            width: 100%;
+            height: 100vw;
+          }
         }
         &:nth-child(even) {
           flex-direction: row-reverse;
+          @media only screen and (max-width: 1024px) {
+            flex-direction: column;
+          }
           .txt {
             a {
               margin: 0 auto 0 0;
@@ -80,16 +119,25 @@
       }
     }
     .planes {
-      padding: 145px 20px;
-      display: flex;
+      padding: 20px;
+      display: grid;
       color: #000;
       gap: 20px;
       max-width: 1080px;
+      grid-template-columns: 280px 1fr;
+      @media only screen and (max-width: 1024px) {
+        flex-direction: column;
+        display: flex;
+      }
       .info {
         display: flex;
         flex-direction: column;
         padding: 0 5px;
         border-right: 1px solid #000;
+        @media only screen and (max-width: 1024px) {
+          border: 0;
+          border-bottom: 1px solid #000;
+        }
         h3 {
           font-size: 35px;
           margin-bottom: 15px;
@@ -105,14 +153,25 @@
         }
       }
       ul {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        @media only screen and (max-width: 1024px) {
+          flex-direction: column;
+          display: flex;
+        }
         li {
           display: flex;
           flex-direction: column;
           border-right: 1px solid #000;
           padding: 0 10px;
+          @media only screen and (max-width: 1024px) {
+            padding: 20px;
+            border: 0;
+            border-bottom: 1px solid #000;
+          }
           h4 {
-            font-size: 35px;
+            font-size: clamp(25px, 2vw, 35px);
+            line-height: clamp(30px, 2vw, 40px);
             margin-bottom: 15px;
           }
           p {

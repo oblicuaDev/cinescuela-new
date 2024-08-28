@@ -1,3 +1,65 @@
+    <div class="thanks">
+    <button type="button" onclick="fadeOut(document.querySelector('.thanks'))">&times;</button>
+        <h2>¡Gracias por tus comentarios!</h2>
+        <!-- <p>_________________________________</p> -->
+        <button type="button" class="btn btn-primary" onclick="fadeOut(document.querySelector('.thanks'))">Continuar</button>
+    </div>
+   <!-- Modal del Tour -->
+   <div id="buzonModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="buzonModalContent">
+            <h2>Buzón de sugerencias</h2>
+            <form action="<?=$_GET['lang']?>/s/set_buzon/" id="buzon" method="POST">
+                <span>
+                    <label for="">Mensaje</label>
+                    <textarea name="content" id="content"></textarea>
+                    <span class="error-message"></span>
+                </span>
+                <input type="hidden" name="mail" id="mail" value="<?= $_SESSION['logged']['mail_us'] ?>">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+      </div>
+    </div>
+   <!-- Modal del Tour -->
+   <!-- Modal del Tour -->
+   <div id="wordsModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="wordsModalContent">
+            <h2>Sugerir contenido</h2>
+            <form action="<?=$_GET['lang']?>/s/set_sugerencia/" id="sugerencia" method="POST">
+                <span>
+                    <label for="type">Tipo de sugerencia</label>
+                    <select name="type" id="type">
+                        <option value="Keyword">Keyword</option>
+                        <option value="Actividad complementaria">Actividad complementaria</option>
+                        <option value="Recurso de cultura y sociedad">Recurso de cultura y sociedad</option>
+                    </select>
+                    <span class="error-message"></span>
+                </span>
+                <span>
+                    <label for="contentSug">Mensaje</label>
+                    <textarea name="contentSug" id="contentSug"></textarea>
+                    <span class="error-message"></span>
+                </span>
+                <input type="hidden" name="movie" id="movie" value="<?= $movie->title->rendered ?>">
+                <input type="hidden" name="user" id="user" value="<?= $_SESSION['logged']['mail_us'] ?>">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+      </div>
+    </div>
+   <!-- Modal del Tour -->
+   <div id="tourModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="tourContent">
+          <!-- El contenido del tour se generará dinámicamente aquí -->
+        </div>
+      </div>
+    </div>
   <!-- Elemento oculto para precargar las imágenes -->
   <div class="image-preloader">
         <img loading="lazy" class="lazyload" src="images/lines/line1.webp" alt="">
@@ -55,16 +117,17 @@
         </div>
     </div>
 </div>
+<div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 1000;font-size: 18px;"></div>
+<div class="bhrcredits" style="text-align:right; background:#393939; padding:10px 0; width:100%;grid-column: 1 / -1;"><div style="max-width: 1200px;margin: 0 auto;color: #FFF;font-size: 12px;display: flex;align-items: center;padding: 2px 20px;justify-content: flex-end;">Creado junto a <a href="https://www.web.oblicua.co/?ref=Cinescuela" style="color:#428bca;" target="_blank"><img src="https://oblicua.co/lab/credits/logo.svg" width="60" style="margin-left:10px;" alt="Sitio diseñado por Oblicua"></a></div></div>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="../js/utils.js"></script>
-    <script src="../js/videoCustom.js"></script>
-    <script src="../js/swipers.js"></script>
-    <script src="../js/notifications.js"></script>
-    <script src="../js/dropdowns.js"></script>
-    <script src="../js/validator.js"></script>
-    <script src="js/main.js"></script>
-
+    <script src="../js/utils.js?v=<?=time()?>"></script>
+    <script src="../js/videoCustom.js?v=<?=time()?>"></script>
+    <script src="../js/swipers.js?v=<?=time()?>"></script>
+    <script src="../js/notifications.js?v=<?=time()?>"></script>
+    <script src="../js/dropdowns.js?v=<?=time()?>"></script>
+    <script src="../js/validator.js?v=<?=time()?>"></script>
+    <script src="js/main.js?v=<?=time()?>"></script>
 </body>
 
 </html>

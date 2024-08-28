@@ -1,0 +1,72 @@
+RewriteEngine on
+#RewriteCond %{HTTPS} off
+#RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,QSA]
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L,QSA]
+
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Credentials true
+RewriteBase /
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+
+# RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ http://%1/$1 [R=302,L]
+
+RewriteRule ^app$ app/index.html [L,END]
+RewriteRule ^app/$ app/index.html [L,END]
+
+RewriteRule ^([esfr]+)/$ index.php?lang=$1&var=val [L,QSA]
+RewriteRule ^([esfr]+)$ index.php?lang=$1&var=val [L,QSA]
+
+RewriteRule ^$ es/ [L,QSA]
+RewriteRule ^/$ es/ [L,QSA]
+#RewriteRule ^/index.php$ es/ [L,QSA]
+
+RewriteRule ^([esfr]+)/peliculas$ movies.php?cat=19743&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/peliculas/$ movies.php?cat=19743&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/peliculas/pagina-([0-9]+)$ movies.php?cat=19743&page=$2&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/peliculas/([A-Za-z0-9]+)/([A-Za-z0-9-]+)-([0-9]+)$ movies.php?cat=19743&$2=$4&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/peliculas/([A-Za-z0-9]+)/([A-Za-z0-9-]+)-([0-9]+)/pagina-([0-9]+)$ movies.php?cat=19743&$2=$4&page=$5&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/peliculas/busquedas$ movies.php?cat=19743&lang=$1 [L,QSA]
+RewriteRule ^([esfr]+)/peliculas/busquedas/pagina-([0-9]+)$ movies.php?cat=19743&page=$3&lang=$1 [L,QSA]
+
+RewriteRule ^([esfr]+)/pelicula/([A-Za-z0-9-]+)-([0-9]+)$ movie.php?cat=19743&rowID=$3&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/pelicula/([A-Za-z0-9-]+)-([0-9]+)/Play$ player.php?cat=19743&rowID=$3&lang=$1 [L,END]
+
+RewriteRule ^([esfr]+)/ciclos$ cycles.php?cat=19744&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/ciclos/$ cycles.php?cat=19744&lang=$1 [L,END]
+
+RewriteRule ^([esfr]+)/ciclo/([A-Za-z0-9-]+)-([0-9]+)$ cycle.php?cycleID=$3&lang=$1 [L,END]
+
+RewriteRule ^([esfr]+)/actualidad$ blog.php?cat=9&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/actualidad/$ blog.php?cat=9&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/actualidad/pagina-([0-9]+)$ blog.php?cat=9&page=$2&lang=$1 [L,END]
+
+RewriteRule ^([esfr]+)/educacion$ blog.php?cat=10&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/educacion/$ blog.php?cat=10&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/educacion/pagina-([0-9]+)$ blog.php?cat=10&page=$2&lang=$1 [L,END]
+
+RewriteRule ^([esfr]+)/informacion/([0-9]+)/([A-Za-z0-9-]+)-([0-9]+)$ info.php?cat=$2&postID=$4&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/eventos/([A-Za-z0-9-]+)-([0-9]+)$ info.php?eventID=$3&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/terminos-([0-9]+)$ info.php?cat=12&pageID=$2&lang=$1 [L,END]
+RewriteRule ^([esfr]+)/cinescuela-([0-9]+)$ info.php?cat=12&pageID=$2&lang=$1 [L,END]
+
+RewriteRule ^([esfr]+)/usuario/([A-Za-z0-9-]+)$ dashboard.php?lang=$1 [L,END]
+
+RewriteRule ^([esfr]+)/subir-pelicula$ submit-movie.php?lang=$1 [L,END]
+RewriteRule ^([esfr]+)/subir-pelicula/$ submit-movie.php?lang=$1 [L,END]
+
+RewriteRule ^([esfr]+)/contacto$ contact.php?lang=$1 [L,END]
+RewriteRule ^([esfr]+)/contacto/$ contact.php?lang=$1 [L,END]
+
+RewriteRule ^jsondata$ jsondata.php [L,QSA]
+
+RewriteRule ^verify$ verify_ip.php [L,QSA]
+RewriteRule ^include_to_list$ set_ip.php [L,QSA]
+
+RewriteRule ^cycles.php$ es/ciclos [L,NC,QSD] 
+RewriteRule ^blog.php$ redireccionar.php?lang=es [L,NC,QSA] 
+
+

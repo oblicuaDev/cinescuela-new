@@ -29,13 +29,13 @@
                         
                 </span>
                 <span class="error-message error-user"></span>
-                <button type="button" onclick="toggleForms()"><?=$sdk->find_array($json,22, $lang)?></button>
+                <!-- <button type="button" onclick="toggleForms()"><?=$sdk->find_array($json,22, $lang)?></button> -->
                 <button type="submit" class="btn btn-primary"><?=$sdk->find_array($json,13, $lang)?></button>
-                <small>Sácale el jugo al cine</small>
+                <!-- <small>Sácale el jugo al cine</small> -->
             </div>
-            <a href="">¿Necesitas ayuda para iniciar sesión?</a>
+            <a href="/es/contacto">¿Necesitas ayuda para iniciar sesión?</a>
         </form>
-        <form action="<?=$_GET['lang']?>/s/forgot_bridge/" method="POST" autocomplete="off" id="forgotForm">
+        <!-- <form action="<?=$_GET['lang']?>/s/forgot_bridge/" method="POST" autocomplete="off" id="forgotForm">
             <img src="images/logo.png" alt="logo">
             <div class="formcontent">
                 <h2><?=$sdk->find_array($json,24, $lang)?></h2>
@@ -48,6 +48,6 @@
                 <button type="button" onclick="toggleForms()"><?=$sdk->find_array($json,32, $lang)?></button>
                 <button type="submit" class="btn btn-primary"><?=$sdk->find_array($json,24, $lang)?></button>
             </div>
-        </form>
+        </form> -->
     </main>
 <?php include 'includes/footer.php'; ?>
