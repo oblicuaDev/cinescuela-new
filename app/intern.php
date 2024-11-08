@@ -117,7 +117,7 @@
                     <p>Modo pedagógico</p>
                 </div>
                 <!-- <span class="age">13+</span> -->
-                <a href="<?=$lang?>/acompanamiento-pedagogico/<?=$sdk->get_alias($movie->title->rendered)?>-<?=$movie->id?>" class="btn btn-primary">Ver acompañamiento pedagógico completo</a>
+                <a href="<?=$lang?>/acompanamiento-pedagogico/<?=$sdk->get_alias($movie->title->rendered)?>-<?=$movie->id?>" class="btn btn-primary" onClick="ga('send', 'event', 'Acompañamiento pedagógico', 'click','Película - <?=$movie->title->rendered?>')">Ver acompañamiento pedagógico completo</a>
             </div>
             <div class="col">
                 <div class="sinopsis">
@@ -157,7 +157,7 @@
                             data-src="https://placehold.co/230x297" alt="Logo Pelicula"></li>
                 </ul>
                 <div class="actions">
-                    <a href="<?=$lang?>/acompanamiento-pedagogico/<?=$sdk->get_alias($movie->title->rendered)?>-<?=$movie->id?>?tabactive=cultura-y-sociedad" class="btn btn-primary">Ver sección completa</a>
+                    <a href="<?=$lang?>/acompanamiento-pedagogico/<?=$sdk->get_alias($movie->title->rendered)?>-<?=$movie->id?>?tabactive=cultura-y-sociedad" class="btn btn-primary" onClick="ga('send', 'event', 'Acompañamiento pedagógico', 'click','Película - <?=$movie->title->rendered?>')">Ver sección completa</a>
                     <button type="button" onclick="openModalSugerencia('Recurso de cultura y sociedad')" class="btn btn-primary sugerencia">Crear sugerencia</button>
                 </div>
             </div>

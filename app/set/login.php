@@ -13,7 +13,6 @@
     if(empty($user)){
         echo json_encode('0');
     }else{
-
         if($user->acf->usuario_activo == '1'){
             $userInfo = $sdk->getInfoUser(strval($user->id));
             $userInfo = $userInfo->related_cinescuela_profiles;

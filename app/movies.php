@@ -75,7 +75,7 @@
             }
                 ?>
         <li onclick="getInfoMovie(<?= $post_json_escaped ?>)">
-            <a data-temalight="<?=$theme?>" href="javascript:;" data-fancybox="" data-src="#dialog-content">
+            <a data-temalight="<?=$theme?>" href="javascript:;" data-fancybox="" data-src="#dialog-content" onClick="ga('send', 'event', 'Películas', 'click', '<?=$post->title->rendered?>')">
                 <picture>
                     <source media="(max-width: 1023px)" srcset="<?=$sdk->replaceUrl($post->acf->afiche)?>">
                     <img src="<?=$sdk->replaceUrl($post->acf->imagen_pelicula)?>" alt="<?=$post->title->rendered?>" id="logo">

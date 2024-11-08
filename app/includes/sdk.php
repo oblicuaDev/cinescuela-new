@@ -84,6 +84,7 @@ class Cinescuela {
         $query_string = http_build_query($query);
         $url = "{$this->domain}{$endpoint}?{$query_string}";
         $url = urldecode($url);
+        var_dump($url);
          // Realizar la solicitud HEAD para obtener solo los encabezados de respuesta
          $response_headers = get_headers($url, 1);
          // Verificar si la solicitud fue exitosa
@@ -190,11 +191,19 @@ class Cinescuela {
         return $info;
     }
     function getPeliculas($ids = "", $page = 1, $per_page = 50, $extra = []) {
-        $peliculas = $this->consultarRecursos("cinescuela-movies", $ids, "", "GET", $page, $per_page,  $extra, true);
+        if($ids != ""){
+            $peliculas = $this->consultarRecursos("cinescuela-movies", $ids, "", "GET", $page, $per_page,  $extra, false);
+        }else{
+            $peliculas = $this->consultarRecursos("cinescuela-movies", $ids, "", "GET", $page, $per_page,  $extra, true);
+        }
         return $peliculas;
     }
     function getCiclos($ids = "", $page = 1, $per_page = 100, $extra = []) {
-        $ciclos = $this->consultarRecursos("cinescuela-ciclo", $ids,  "", "GET", $page, $per_page, $extra, true);
+        if($ids != ""){
+            $ciclos = $this->consultarRecursos("cinescuela-ciclo", $ids,  "", "GET", $page, $per_page, $extra, false);
+        }else{
+            $ciclos = $this->consultarRecursos("cinescuela-ciclo", $ids,  "", "GET", $page, $per_page, $extra, true);
+        }
         return $ciclos;
     }
     function getSliderPrincipales($ids = "") {
@@ -234,11 +243,11 @@ class Cinescuela {
         return $slsec["response"];
     }
     function loginCinescuelaUser($username){
-        $user = $this->consultarRecursos("cinescuela-users", "", "","GET", 1, 1,['search'=>$username]);
+        $user = $this->consultarRecursos("cinescuela-users", "", "","GET", 99, 99,['slug'=>$username], false);
         return $user['response'];
     }
     function getInfoUser($id){
-        $user = $this->consultarRecursos("cinescuela-users", $id);
+        $user = $this->consultarRecursos("cinescuela-users", $id, "","GET", 1, 1,[], false);
         return $user;
     }
     function getProfileUsers($id){

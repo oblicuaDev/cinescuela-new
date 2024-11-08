@@ -30,8 +30,10 @@
                 ?>
         <li onclick="getInfoMovie(<?= $post_json_escaped ?>)">
       
-            <a href="javascript:;" data-fancybox="" data-src="#dialog-content" data-temalight="<?=$theme?>"
-                href="<?=$_GET['lang']?>/acompanamiento-pedagogico/<?=$sdk->get_alias($post->title->rendered)?>-<?=$post->id?>">
+            <a data-fancybox="" data-src="#dialog-content" data-temalight="<?=$theme?>"
+                href="<?=$_GET['lang']?>/acompanamiento-pedagogico/<?=$sdk->get_alias($post->title->rendered)?>-<?=$post->id?>"
+                onClick="ga('send', 'event', 'Acompañamiento pedagógico', 'click','Película - <?=$post->title->rendered?>')"
+                >
                 <?php if($post->acf->acompanamiento_pedagogico_privado == false){ ?>
                     <div class="corner-ribbon">
                         <span>Acceso libre</span>

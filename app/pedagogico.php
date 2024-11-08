@@ -13,6 +13,7 @@
         <div class="actions">
             <?php if(!isset($_SESSION['logged'])){ ?>
                 <a href="<?=$lang?>/pelicula/<?=$sdk->get_alias($movie->title->rendered)?>-<?=$movie->id?>"
+                onClick="ga('send', 'event', 'Acompañamiento pedagógico', 'click','Reproducir - <?=$movie->title->rendered?>')"
                     class="btn btn-primary"><svg width="50" height="50" viewBox="0 0 50 50" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -349,22 +350,22 @@
                 if ($tool->tipo_de_herramienta) {
                     switch ($tool->tipo_de_herramienta) {
                         case "17":
-                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_video" title="Video">Video</a>';
+                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_video" title="Video" >Video</a>';
                             break;
                         case "18":
-                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_imagen" title="Fotografía">Imagen</a>';
+                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_imagen" title="Fotografía" >Imagen</a>';
                             break;
                         case "19":
-                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_cartilla" title="Cartilla">Cartilla</a>';
+                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_cartilla" title="Cartilla" >Cartilla</a>';
                             break;
                         case "110":
-                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_multi" title="Multimedia">Multimedia</a>';
+                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_multi" title="Multimedia" >Multimedia</a>';
                             break;
                         case "111":
-                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_audio" title="Audio">Audio</a>';
+                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_audio" title="Audio" >Audio</a>';
                             break;
                         case "21400":
-                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_estadistica" title="Infografía">Infografía</a>';
+                            $toolHtml = '<a href="'.$tool->enlace.'" target="_BLANK" class="t_estadistica" title="Infografía" >Infografía</a>';
                             break;
                     }
                     // Generar el HTML completo de la herramienta

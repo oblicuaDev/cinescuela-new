@@ -6,7 +6,9 @@
     $post_json = json_encode($movie->acf->peliculas_relacionadas);
     // Escapamos las comillas para evitar problemas con el HTML
     $post_json_escaped = htmlspecialchars($post_json, ENT_QUOTES, 'UTF-8');
-    $moviesIDs = array_map('strval', $_SESSION['logged']['perfil_de_usuario'][0]->peliculas_del_ciclo);
+    if(isset($_SESSION['logged']['perfil_de_usuario'])){
+        $moviesIDs = array_map('strval', $_SESSION['logged']['perfil_de_usuario'][0]->peliculas_del_ciclo);
+    }
 
 ?>
 
@@ -37,7 +39,8 @@
                         }
                 ?>
                 <?php 
-                if(isset($_SESSION['logged'])){ 
+
+                if(isset($_SESSION['logged']) && $_SESSION['logged']['cod_us'] != NULL){ 
                     ?>
                     <a href="app/<?=$lang?>/pelicula/<?=$sdk->get_alias( $movie->title->rendered)?>-<?= $movie->id?>" class="btn btn-primary">Reproducir película</a>
                 <?php 
@@ -76,11 +79,14 @@
             </div>
             <?php 
 			if($movie->acf->tiene_acompanamiento){
-                if ($_SESSION['logged']['cod_us'] != "" || $_SESSION['logged']['cod_us'] == "" && !$movie->acf->acompanamiento_pedagogico_privado || in_array(strval($movie->id), $moviesIDs) ) { ?>
-            <a href="app/<?=$lang?>/acompanamiento-pedagogico/<?=$sdk->get_alias( $movie->title->rendered)?>-<?= $movie->id?>" class="btn btn-primary">Ver el acompañamiento pedagógico</a>
+                if(isset($_SESSION['logged']['cod_us'])){
+                    if ($_SESSION['logged']['cod_us'] != "" || $_SESSION['logged']['cod_us'] == "" && !$movie->acf->acompanamiento_pedagogico_privado || in_array(strval($movie->id), $moviesIDs) ) {
+                
+                     ?>
+            <a href="app/<?=$lang?>/acompanamiento-pedagogico/<?=$sdk->get_alias( $movie->title->rendered)?>-<?= $movie->id?>" onClick="ga('send', 'event', 'Acompañamiento pedagógico', 'click','Película - <?=$movie->title->rendered?>')" class="btn btn-primary">Ver el acompañamiento pedagógico</a>
             <?php }else{ ?>
             <a href="app/" class="btn btn-primary">Inicia sesión para ver el acompañamiento pedagógico</a>
-            <?php }} ?>
+            <?php }}} ?>
             <ul class="tags">
                 <?php 
                 $palabras_array = explode(",", $movie->acf->palabras_clave_de_esta_publicacion);

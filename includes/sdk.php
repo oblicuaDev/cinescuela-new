@@ -205,11 +205,19 @@ class Cinescuela {
         return $peliculas;
     }
     function getPeliculas($ids = "", $page = 1, $per_page = 50, $extra = []) {
-        $peliculas = $this->consultarRecursos("cinescuela-movies", $ids, "", "GET", $page, $per_page,  $extra, true);
+        if($ids != ""){
+            $peliculas = $this->consultarRecursos("cinescuela-movies", $ids, "", "GET", $page, $per_page,  $extra, false);
+        }else{
+            $peliculas = $this->consultarRecursos("cinescuela-movies", $ids, "", "GET", $page, $per_page,  $extra, true);
+        }
         return $peliculas;
     }
     function getCiclos($ids = "", $page = 1, $per_page = 100, $extra = []) {
-        $ciclos = $this->consultarRecursos("cinescuela-ciclo", $ids,  "", "GET", $page, $per_page, $extra, true);
+        if($ids != ""){
+            $ciclos = $this->consultarRecursos("cinescuela-ciclo", $ids,  "", "GET", $page, $per_page, $extra, false);
+        }else{
+            $ciclos = $this->consultarRecursos("cinescuela-ciclo", $ids,  "", "GET", $page, $per_page, $extra, true);
+        }
         return $ciclos;
     }
     function getSliderPrincipales($ids = "") {
@@ -257,7 +265,8 @@ class Cinescuela {
         return $peliculas;
     }
     function loginCinescuelaUser($username){
-        $user = $this->consultarRecursos("cinescuela-users", "", "","GET", 1, 1,['search'=>$username]);
+        // $recurso, $ids = "", $body = "", $method = "GET", $page = 1, $per_page = 50, $extra = [], $cache = true
+        $user = $this->consultarRecursos("cinescuela-users", "", "","GET", 1, 1,['slug'=>$username], false);
         return $user['response'];
     }
     function getInfoUser($id){

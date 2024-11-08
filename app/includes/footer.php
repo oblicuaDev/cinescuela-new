@@ -102,10 +102,12 @@
         <div class="content-body">
             <div class="left">
                 <div class="actions"></div>
-                <p>En una región húmeda y calurosa de Colombia, transcurren los días de Emilio, un joven de 16 años,
-                    que ante la desazón y falta de oportunidades no tiene más opción que entrar en el grupo
-                    paramilitar de la zona. Una clase de autómatas, que sin ningún atisbo de sentimientos controlan
-                    el entorno en el que ningún joven nacido en territorios en disputa pareciera poder escapar.</p>
+                <div class="sinopsis">
+                    <p>En una región húmeda y calurosa de Colombia, transcurren los días de Emilio, un joven de 16 años,
+                        que ante la desazón y falta de oportunidades no tiene más opción que entrar en el grupo
+                        paramilitar de la zona. Una clase de autómatas, que sin ningún atisbo de sentimientos controlan
+                        el entorno en el que ningún joven nacido en territorios en disputa pareciera poder escapar.</p>
+                </div>
                 <div class="moreinfo">
                     <p class="director">Dirigido por Andres Jimenez Quintero</p>
                     <p class="country__date">Colombia 2021</p>

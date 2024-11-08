@@ -3,7 +3,7 @@ async function getMoviesMes() {
     let peliculas_del_mes = JSON.parse(
       document.querySelector("main").dataset.movies
     );
-    let movies = getWithExpiry("moviesDelMes");
+    let movies;
 
     if (!movies) {
       const response = await fetch(`${lang}/g/getMovies/`, {
@@ -14,7 +14,7 @@ async function getMoviesMes() {
         },
       });
       movies = await response.json();
-      setWithExpiry("moviesDelMes", movies, 7 * 24 * 60 * 60 * 1000); // 7 días en milisegundos
+      // setWithExpiry("moviesDelMes", movies, 7 * 24 * 60 * 60 * 1000); // 7 días en milisegundos
     }
     if (window.innerWidth < 768) {
       // Configuración para Mobile
@@ -30,7 +30,7 @@ async function getMoviesMes() {
               <div class="swiper-slide">
                 <a href="${lang}/pelicula/${get_alias(movie.title.rendered)}-${
                   movie.id
-                }">
+                }" onClick="ga('send', 'event', 'Películas', 'click', 'botón mas - ${movie.title.rendered}')">
                   <img loading="lazy" class="lazyload" src="https://picsum.photos/20/20" data-src="${
                     movie.acf.afiche
                   }" alt="Logo Pelicula">
@@ -65,7 +65,7 @@ async function getMoviesMes() {
         }`;
 
         document.querySelector(".home .peliculas-mes").innerHTML += `
-              <a href="${link}">
+              <a href="${link}" onClick="ga('send', 'event', 'Películas', 'click', 'botón mas - ${movie.title.rendered}')">
                 <img loading="lazy" class="lazyload" src="https://picsum.photos/20/20" data-src="${movie.acf.afiche}" alt="Logo Pelicula">
               </a>`;
       });
@@ -81,16 +81,21 @@ const getCiclosInfo = async () => {
   const cicloID = mainElement.dataset.ciclo;
 
   if (cicloID) {
-    let ciclo = getWithExpiry("cicloGuardado");
+    let ciclo;
 
     if (!ciclo || ciclo.id != cicloID) {
       const responseCiclo = await fetch(`${lang}/g/getCiclos/?id=${cicloID}`);
       ciclo = await responseCiclo.json();
-      setWithExpiry("cicloGuardado", ciclo, 7 * 24 * 60 * 60 * 1000); // 7 días en milisegundos
+      // setWithExpiry("cicloGuardado", ciclo, 7 * 24 * 60 * 60 * 1000); // 7 días en milisegundos
     }
     document.querySelector(
       ".cicloHome .ciclo-mes"
     ).href = `${lang}/ciclos/${get_alias(ciclo.title.rendered)}-${ciclo.id}`;
+    document.querySelector(
+      ".cicloHome .ciclo-mes"
+    ).addEventListener("click",()=>{
+      ga('send', 'event', 'Ciclos', 'click',`Ir al ciclo - ${ciclo.title.rendered}`);
+    });
     let template = `<img src="${ciclo.acf.imagen_principal_el_ciclo}" alt="${ciclo.title.rendered}"><div class="info"><h2>${ciclo.title.rendered}</h2><small>${ciclo.acf.mes_del_ciclo} ${ciclo.acf.ano_del_ciclo}</small>${ciclo.acf.descripcion_corta_del_ciclo}</div>`;
     document.querySelector(".cicloHome .ciclo-mes").innerHTML += template;
     lazyImages();
@@ -119,7 +124,7 @@ async function getCiclos(year = new Date().getFullYear()) {
       ciclos.response.forEach((ciclo) => {
         let template = `<li><a href="${lang}/ciclos/${get_alias(
           ciclo.title.rendered
-        )}-${ciclo.id}"><div class="image"><img data-src="${
+        )}-${ciclo.id}" onClick="ga('send', 'event', 'Ciclos', 'click','${ciclo.title.rendered}')"><div class="image"><img data-src="${
           ciclo.acf.imagen_principal_el_ciclo
         }" loading="lazy" class="lazyload" src="https://picsum.photos/20/20" alt="${
           ciclo.title.rendered
@@ -151,7 +156,7 @@ async function getCiclos(year = new Date().getFullYear()) {
         moreciclos.forEach((ciclo) => {
           let template = `<li><a href="${lang}/ciclos/${get_alias(
             ciclo.title.rendered
-          )}-${ciclo.id}"><div class="image"><img data-src="${
+          )}-${ciclo.id}" onClick="ga('send', 'event', 'Ciclos', 'click','${ciclo.title.rendered}')"><div class="image"><img data-src="${
             ciclo.acf.imagen_principal_el_ciclo
           }" loading="lazy" class="lazyload" src="https://picsum.photos/20/20" alt="${
             ciclo.title.rendered
@@ -183,7 +188,7 @@ async function getMovieCiclos() {
       moreciclos.forEach((ciclo) => {
         let template = `<li><a href="${lang}/ciclos/${get_alias(
           ciclo.title.rendered
-        )}-${ciclo.id}"><div class="image"><img data-src="${
+        )}-${ciclo.id}" onClick="ga('send', 'event', 'Ciclos', 'click','${ciclo.title.rendered}')"><div class="image"><img data-src="${
           ciclo.acf.imagen_principal_el_ciclo
         }" loading="lazy" class="lazyload" src="https://picsum.photos/20/20" alt="${
           ciclo.title.rendered
@@ -254,7 +259,7 @@ async function getCicloMovies() {
         // Crear el elemento de lista para pantallas más grandes
         const movieElement = document.createElement("li");
         movieElement.classList.add("afiche-movie");
-        movieElement.innerHTML = `<a href="${link}"><img data-src="${afiche}" loading="lazy" class="lazyload" src="https://picsum.photos/20/20" /></a>`;
+        movieElement.innerHTML = `<a onClick="ga('send', 'event', 'Acompañamiento pedagógico', 'click','Película - ${titleRendered}')" href="${link}"><img data-src="${afiche}" loading="lazy" class="lazyload" src="https://picsum.photos/20/20" /></a>`;
         movieElement.addEventListener("click", () => getInfoMovie(movie));
         document.querySelector(".movies").appendChild(movieElement);
       }
@@ -379,7 +384,7 @@ async function getNovedades() {
         icon = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M16.25 14.375C16.5952 14.375 16.875 14.0952 16.875 13.75V5C16.875 4.65482 16.5952 4.375 16.25 4.375L3.75 4.375C3.40482 4.375 3.125 4.65482 3.125 5L3.125 13.75C3.125 14.0952 3.40482 14.375 3.75 14.375L16.25 14.375ZM18.125 13.75C18.125 14.7855 17.2855 15.625 16.25 15.625L3.75 15.625C2.71447 15.625 1.875 14.7855 1.875 13.75V5C1.875 3.96447 2.71447 3.125 3.75 3.125L16.25 3.125C17.2855 3.125 18.125 3.96447 18.125 5V13.75Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M6.875 17.5C6.875 17.1548 7.15482 16.875 7.5 16.875H12.5C12.8452 16.875 13.125 17.1548 13.125 17.5C13.125 17.8452 12.8452 18.125 12.5 18.125H7.5C7.15482 18.125 6.875 17.8452 6.875 17.5Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1.875 11.875C1.875 11.5298 2.15482 11.25 2.5 11.25H17.5C17.8452 11.25 18.125 11.5298 18.125 11.875C18.125 12.2202 17.8452 12.5 17.5 12.5H2.5C2.15482 12.5 1.875 12.2202 1.875 11.875Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M10 14.375C10.3452 14.375 10.625 14.6548 10.625 15V17.5C10.625 17.8452 10.3452 18.125 10 18.125C9.65482 18.125 9.375 17.8452 9.375 17.5V15C9.375 14.6548 9.65482 14.375 10 14.375Z" fill="white"/></svg>`;
       }
       document.querySelector(`.novedades-list`).innerHTML += `
-      <a href="${lang}/informacion/${get_alias(rendered)}-${id}">
+      <a href="${lang}/informacion/${get_alias(rendered)}-${id}" onClick="ga('send', 'event', 'Blog', 'click','Ver mas - ${rendered})">
       <div class="image">
       <img data-src="${imagen}" loading="lazy" class="lazyload" src="https://picsum.photos/20/20" />
       <div class="badge">
@@ -425,7 +430,7 @@ function getMoreMovies() {
             movie.acf.logo_de_la_pelicula && movie.acf.logo_de_la_pelicula != ""
               ? `<img loading="lazy" class="lazyload movieLogo" src="https://picsum.photos/20/20" data-src="${movie.acf.logo_de_la_pelicula}" alt="Logo Pelicula">`
               : `<span class="title-movie">${movie.title.rendered}</span>`;
-          container.innerHTML += `<li ><a href="${link}" data-temalight="${theme}">
+          container.innerHTML += `<li ><a onClick="ga('send', 'event', 'Acompañamiento pedagógico', 'click','Película - ${movie.title.rendered}')" href="${link}" data-temalight="${theme}">
           ${
             movie.acf.acompanamiento_pedagogico_privado == false
               ? `   <div class="corner-ribbon"><span>Acceso libre</span></div>`

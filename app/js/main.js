@@ -21,11 +21,11 @@ const getCiclosInfo = async () => {
   const swiperWrapper = document.querySelector(`#ciclomes .swiper-wrapper`);
   const cicloID = mainElement.dataset.ciclo_del_mes;
   if (cicloID) {
-    let ciclo = getWithExpiry("cicloGuardado");
+    let ciclo;
     if (!ciclo || ciclo.id != cicloID) {
       const responseCiclo = await fetch(`${lang}/g/getCiclos/?id=${cicloID}`);
       ciclo = await responseCiclo.json();
-      setWithExpiry("cicloGuardado", ciclo, 7 * 24 * 60 * 60 * 1000); // 7 días en milisegundos
+      // setWithExpiry("cicloGuardado", ciclo, 7 * 24 * 60 * 60 * 1000); // 7 días en milisegundos
     }
 
     document.querySelector(
@@ -110,7 +110,7 @@ const getLoMasVisto = async () => {
 
   if (peliculasDataset) {
     let lomasvisto = peliculasDataset;
-    let movies = getWithExpiry("lomasvistomovies");
+    let movies;
 
     if (!movies) {
       const response = await fetch(`${lang}/g/getMovies/`, {
@@ -123,7 +123,7 @@ const getLoMasVisto = async () => {
       movies = await response.json();
 
       // Guardar las películas en localStorage con una expiración de una semana
-      setWithExpiry("lomasvistomovies", movies, 7 * 24 * 60 * 60 * 1000); // 7 días en milisegundos
+      // setWithExpiry("lomasvistomovies", movies, 7 * 24 * 60 * 60 * 1000); // 7 días en milisegundos
     }
 
     swiperWrapper.innerHTML = "";
@@ -317,6 +317,7 @@ const getInfoMovie = (movie) => {
     id,
     grupo_de_ed,
     title: { rendered: titleRendered },
+    content: { rendered: contentRendered },
     acf: {
       director_pelicula,
       pais_pelicula,
@@ -330,6 +331,8 @@ const getInfoMovie = (movie) => {
   console.log(movie);
 
   // Precargar imágenes
+  document.querySelector("#dialog-content .sinopsis").innerHTML =
+    contentRendered;
   preloadImages([imagen_pelicula, logo_de_la_pelicula]);
   document.querySelector("#dialog-content .image img").dataset.src =
     imagen_pelicula;
@@ -528,7 +531,11 @@ const addOptionsToFilters = (options = [{ id, title }], container, type) => {
     options.forEach((option) => {
       container.innerHTML += `<li><a href="${lang}/buscar/${type}/${get_alias(
         option.title
-      )}/${option.id}">${option.title}</a></li>`;
+      )}/${
+        option.id
+      }" onclick="ga("send", "event", "Filtro películas", "click", ${
+        option.title
+      });">${option.title}</a></li>`;
     });
   }
 };
@@ -666,7 +673,10 @@ async function getFavoritesMovies() {
   }
 }
 document.addEventListener("DOMContentLoaded", function () {
-  if (document.querySelector("#openSearch") || document.querySelector("#openSearchMobile")) {
+  if (
+    document.querySelector("#openSearch") ||
+    document.querySelector("#openSearchMobile")
+  ) {
     document.querySelector("#openSearch").addEventListener("click", () => {
       document.querySelectorAll("header .left nav a span").forEach((el, i) => {
         if (i > 0) {
@@ -676,20 +686,27 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelector(".search-comp").classList.toggle("active");
       document.querySelector("#search-input").focus();
     });
-    document.querySelector("#openSearchMobile").addEventListener("click", () => {
-      document.querySelectorAll("header .left nav a span").forEach((el, i) => {
-        if (i > 0) {
-          el.style.display = "none";
-        }
+    document
+      .querySelector("#openSearchMobile")
+      .addEventListener("click", () => {
+        document
+          .querySelectorAll("header .left nav a span")
+          .forEach((el, i) => {
+            if (i > 0) {
+              el.style.display = "none";
+            }
+          });
+        document.querySelector(".search-comp").classList.toggle("active");
+        document.querySelector("#search-input").focus();
       });
-      document.querySelector(".search-comp").classList.toggle("active");
-      document.querySelector("#search-input").focus();
-    });
-    
   }
   if (window.innerWidth < 768) {
-    if(document.querySelector("#search")){
-      document.querySelector("#search").addEventListener("click", ()=> document.querySelector(".search-comp").classList.toggle("active"))
+    if (document.querySelector("#search")) {
+      document
+        .querySelector("#search")
+        .addEventListener("click", () =>
+          document.querySelector(".search-comp").classList.toggle("active")
+        );
     }
   }
   if (windowWidth < 768 && document.querySelector(".home main .banner video")) {
@@ -789,7 +806,9 @@ async function getCiclos(year = new Date().getFullYear()) {
 
   // Verificar si el contenedor "ciclos" está presente en la página
   if (document.querySelector(".ciclos")) {
-    document.querySelector(".ciclos-list").innerHTML = `<li class="skeleton"><a href=""><div class="image"></div><div class="info"></div></a></li><li class="skeleton"><a href=""><div class="image"></div><div class="info"></div></a></li><li class="skeleton"><a href=""><div class="image"></div><div class="info"></div></a></li><li class="skeleton"><a href=""><div class="image"></div><div class="info"></div></a></li>`;
+    document.querySelector(
+      ".ciclos-list"
+    ).innerHTML = `<li class="skeleton"><a href=""><div class="image"></div><div class="info"></div></a></li><li class="skeleton"><a href=""><div class="image"></div><div class="info"></div></a></li><li class="skeleton"><a href=""><div class="image"></div><div class="info"></div></a></li><li class="skeleton"><a href=""><div class="image"></div><div class="info"></div></a></li>`;
 
     // Verificar en la caché antes de hacer la solicitud
     if (!cacheCiclos[year]) {
@@ -800,14 +819,16 @@ async function getCiclos(year = new Date().getFullYear()) {
 
     const ciclos = cacheCiclos[year]; // Obtener los ciclos desde la caché
     const ciclosList = document.querySelector(".ciclos-list");
-    document.querySelector(".ciclos-list").innerHTML ="";
+    document.querySelector(".ciclos-list").innerHTML = "";
     // Añadir ciclos a la lista
     ciclos.response.forEach((ciclo) => {
       let template = `
         <li>
           <a href="${lang}/ciclos/${get_alias(ciclo.title.rendered)}-${
         ciclo.id
-      }">
+      }" onClick="ga('send', 'event', 'Ciclos', 'click','${
+        ciclo.title.rendered
+      }')">
             <div class="image">
               <img data-src="${
                 ciclo.acf.imagen_principal_el_ciclo
@@ -861,7 +882,9 @@ async function getCiclos(year = new Date().getFullYear()) {
           <li>
             <a href="${lang}/ciclos/${get_alias(ciclo.title.rendered)}-${
           ciclo.id
-        }">
+        }" onClick="ga('send', 'event', 'Ciclos', 'click','${
+          ciclo.title.rendered
+        }')">
               <div class="image">
                 <img data-src="${
                   ciclo.acf.imagen_principal_el_ciclo

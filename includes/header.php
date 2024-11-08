@@ -15,7 +15,7 @@
                 <?php if(isset($_SESSION['logged']['cod_us'])){ ?>
                     <a href="app/<?=$lang?>/inicio" class="btn btn-secondary mobile">Ir a la aplicación</a>
                     <?php }else{ ?>
-                        <a href="app/" class="btn btn-secondary mobile">Iniciar sesión</a>
+                        <a href="app/" onClick="ga('send', 'event', 'Menú header', 'click','<?=$_SESSION['logged']['usu_us']?>')" class="btn btn-secondary mobile">Iniciar sesión</a>
                 <?php } ?>
             </nav>
             

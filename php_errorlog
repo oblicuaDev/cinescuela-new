@@ -1,4 +1,5 @@
-[19-Aug-2024 18:35:52 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in /home/customer/www/cinescuela.org/public_html/search.php:28
+[09-Sep-2024 14:17:08 CST6CDT] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /home/customer/www/cinescuela.org/public_html/movie.php:81
 Stack trace:
-#0 {main}
-  thrown in /home/customer/www/cinescuela.org/public_html/search.php on line 28
+#0 /home/customer/www/cinescuela.org/public_html/movie.php(81): in_array('125', NULL)
+#1 {main}
+  thrown in /home/customer/www/cinescuela.org/public_html/movie.php on line 81
