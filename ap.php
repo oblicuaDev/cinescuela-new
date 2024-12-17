@@ -30,7 +30,7 @@
         <li>
             <a data-temalight="<?=$theme?>"
             target="_blank"
-            onClick="ga('send', 'event', 'Acompañamiento pedagógico', 'click','Película - <?=$post->title->rendered?>')"
+            onClick="gtag('event', 'pelicula_click', {'category': 'Acompañamiento pedagógico','label': 'Película - <?= $post->title->rendered ?>'});"
                 href="app/<?=$_GET['lang']?>/acompanamiento-pedagogico/<?=$sdk->get_alias($post->title->rendered)?>-<?=$post->id?>">
                 <?php if($post->acf->acompanamiento_pedagogico_privado == false){ ?>
                     <div class="corner-ribbon">

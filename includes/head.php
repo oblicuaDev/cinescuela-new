@@ -16,16 +16,14 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css?v=<?=time()?>">
     <script src="js/jquery-1.8.3.min.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S9RTSZPKJE"></script>
     <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-29442208-8', 'auto');
-        ga('send', 'pageview');
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
 
     </script>
     <? if($_SESSION['logged']['cod_us']>0) { ?>
@@ -46,9 +44,11 @@
 
             // Puedes agregar más parámetros o modificar los existentes de esta forma
         </script>
-	<script>ga('create', 'UA-29442208-8', { 'userId': '<?=$_SESSION['logged']['cod_us']."-".$_SESSION['logged']['usu_us']?>' });	 </script>
+	<script>
+        gtag('config', 'TAG_ID', {'user_id': '<?=$_SESSION['logged']['cod_us']."-".$_SESSION['logged']['usu_us']?>'}); 
+    </script>
 	<? }else { ?>
-	<script>ga('create', 'UA-29442208-8','auto');</script>
+	<script>gtag('config', 'G-S9RTSZPKJE');</script>
 	<? } ?>
     <? if($_SESSION['logged']['cod_us']>0){ ?>
         <? }else{
