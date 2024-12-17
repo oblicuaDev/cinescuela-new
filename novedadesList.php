@@ -31,7 +31,7 @@
         ?>
             <a 
             href="es/informacion/<?=$sdk->get_alias($noticia->title->rendered)?>-<?=$noticia->id?>"
-            onClick="ga('send', 'event', 'Blog', 'click','Ver mas - <?=$noticia->title->rendered?>')"
+            onClick="gtag('event', 'ver_mas_blog', {'section': 'Blog','article_title': '<?= $noticia->title->rendered ?>'});"
             >
             <div class="image">
             <img data-src="<?=$noticia->acf->imagen?>" loading="lazy" class="lazyload" src="<?=$noticia->acf->imagen?>">

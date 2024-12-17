@@ -73,7 +73,7 @@
             }
                 ?>
         <li>
-            <a onClick="ga('send', 'event', 'Acompañamiento pedagógico', 'click','Película - <?=$post->title->rendered?>')" data-temalight="<?=$theme?>" href="<?=$_GET['lang']?>/pelicula/<?=$sdk->get_alias($post->title->rendered)?>-<?=$post->id?>">
+            <a onClick="gtag('event', 'pelicula_click', {'section': 'Acompañamiento pedagógico','movie_title': '<?= $post->title->rendered ?>'});" data-temalight="<?=$theme?>" href="<?=$_GET['lang']?>/pelicula/<?=$sdk->get_alias($post->title->rendered)?>-<?=$post->id?>">
                 <picture>
                     <source media="(max-width: 1023px)" srcset="<?=$sdk->replaceUrl($post->acf->afiche)?>">
                     <img src="<?=$sdk->replaceUrl($post->acf->imagen_pelicula)?>" alt="<?=$post->title->rendered?>" id="logo">

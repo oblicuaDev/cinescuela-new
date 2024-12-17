@@ -76,7 +76,6 @@
         let lang = "<?=$lang?>";
         let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth || 0;
     </script>
-    <script> ga('send', 'pageview'); </script>
 </head>
 
 <body class="<?=$bodyClass?> cinescuela-page">

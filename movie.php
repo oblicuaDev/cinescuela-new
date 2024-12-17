@@ -83,7 +83,7 @@
                     if ($_SESSION['logged']['cod_us'] != "" || $_SESSION['logged']['cod_us'] == "" && !$movie->acf->acompanamiento_pedagogico_privado || in_array(strval($movie->id), $moviesIDs) ) {
                 
                      ?>
-            <a href="app/<?=$lang?>/acompanamiento-pedagogico/<?=$sdk->get_alias( $movie->title->rendered)?>-<?= $movie->id?>" onClick="ga('send', 'event', 'Acompañamiento pedagógico', 'click','Película - <?=$movie->title->rendered?>')" class="btn btn-primary">Ver el acompañamiento pedagógico</a>
+            <a href="app/<?=$lang?>/acompanamiento-pedagogico/<?=$sdk->get_alias( $movie->title->rendered)?>-<?= $movie->id?>" onClick="gtag('event', 'pelicula_click', {'section': 'Acompañamiento pedagógico','movie_title': 'Película - <?= $movie->title->rendered ?>'});" class="btn btn-primary">Ver el acompañamiento pedagógico</a>
             <?php }else{ ?>
             <a href="app/" class="btn btn-primary">Inicia sesión para ver el acompañamiento pedagógico</a>
             <?php }}} ?>
